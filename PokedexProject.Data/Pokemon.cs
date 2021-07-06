@@ -15,34 +15,32 @@ namespace PokedexProject.Data
         public string Name { get; set; }
         [Required]
         [Display(Name = "Pokemon Type")]
-        public EnumType Type { get; set; }
+        public Type Type { get; set; }
         [Required]
         [Display(Name = "Pokemon Caught")]
         public int NumCaught { get; set; }
 
     }
-    public class EnumType
+   public enum Type
     {
-        enum Type
-        {
-            Normal,
-            Fire,
-            Water,
-            Grass,
-            Electric,
-            Ice,
-            Fighting,
-            Poison,
-            Ground,
-            Flying,
-            Psychic,
-            Bug,
-            Rock,
-            Ghost,
-            Dark,
-            Dragon,
-            Steel,
-            Fairy
-        }
+        Normal,
+        Fire,
+        Water,
+        Grass,
+        Electric,
+        Ice,
+        Fighting,
+        Poison,
+        Ground,
+        Flying,
+        Psychic,
+        Bug,
+        Rock,
+        Ghost,
+        Dark,
+        Dragon,
+        Steel,
+        Fairy
     }
+
 }
