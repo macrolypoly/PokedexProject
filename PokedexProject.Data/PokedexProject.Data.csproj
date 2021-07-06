@@ -56,6 +56,15 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Migrations\202107062212592_InitialCreate.cs" />
+    <Compile Include="Migrations\202107062212592_InitialCreate.Designer.cs">
+      <DependentUpon>202107062212592_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107062214566_ex.cs" />
+    <Compile Include="Migrations\202107062214566_ex.Designer.cs">
+      <DependentUpon>202107062214566_ex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route.cs" />
@@ -64,6 +73,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202107062212592_InitialCreate.resx">
+      <DependentUpon>202107062212592_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107062214566_ex.resx">
+      <DependentUpon>202107062214566_ex.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
