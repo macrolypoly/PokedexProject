@@ -7,24 +7,10 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Data
 {
-    public class Pokemon
+    public enum PokeType
     {
-        [Key]
-        public int PokemonId { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        [Display(Name = "Pokemon Type")]
-        public Type Type { get; set; }
-        [Required]
-        [Display(Name = "Pokemon Caught")]
-        public int NumCaught { get; set; }
-
-    }
-   public enum Type
-    {
-        Normal,
-        Fire,
+        Normal = 1,
+        Fire = 2,
         Water,
         Grass,
         Electric,
@@ -40,7 +26,22 @@ namespace PokedexProject.Data
         Dark,
         Dragon,
         Steel,
-        Fairy
+        Fairy,
+        None
     }
+    public class Pokemon
+    {
+        [Key]
+        public int PokemonId { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Pokemon Type")]
+        public PokeType Type { get; set; }
+        [Required]
+        [Display(Name = "Second Type")]
+        public PokeType Type2 { get; set; }
+    }
+   
 
 }

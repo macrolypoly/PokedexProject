@@ -9,15 +9,14 @@ using System.Web.Mvc;
 
 namespace PokedexProject.Controllers
 {
-    [Authorize]
-    public class PokemonController : Controller
+    public class TrainerController : Controller
     {
-        // GET: Pokemon
+        //GET: Trainer
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new PokemonService(userId);
-            var model = service.GetPokemon();
+            var service = new TrainerService(userId);
+            var model = service.GetTrainer();
 
             return View(model);
         }
@@ -27,27 +26,27 @@ namespace PokedexProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PokemonCreate model)
+        public ActionResult Create(TrainerCreate model)
         {
             if (!ModelState.IsValid) return View(model);
-     
-            var service = CreatePokemonService();
 
-            if (service.CreatePokemon(model))
+            var service = CreateTrainerService();
+
+            if (service.CreateTrainer(model))
             {
-                TempData["SaveResult"] = "Your pokemon was added.";
+                TempData["SaveResult"] = "Your trainer was created.";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "Pokemon could not be added.");
+            ModelState.AddModelError("", "Trainer could not be created.");
 
             return View(model);
         }
 
-        private PokemonService CreatePokemonService()
+        private TrainerService CreateTrainerService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new PokemonService(userId);
+            var service = new TrainerService(userId);
             return service;
         }
     }

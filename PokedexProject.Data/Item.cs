@@ -11,6 +11,5 @@ namespace PokedexProject.Data
         public int ItemId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int NumItem { get; set; }
     }
 }

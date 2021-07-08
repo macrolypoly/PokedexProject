@@ -14,7 +14,6 @@ namespace PokedexProject.Data.Migrations
                         ItemId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
-                        NumItem = c.Int(nullable: false),
                         Route_RouteId = c.Int(),
                         Trainer_TrainerId = c.Int(),
                     })
@@ -31,7 +30,7 @@ namespace PokedexProject.Data.Migrations
                         PokemonId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Type = c.Int(nullable: false),
-                        NumCaught = c.Int(nullable: false),
+                        Type2 = c.Int(nullable: false),
                         Route_RouteId = c.Int(),
                         Trainer_TrainerId = c.Int(),
                     })

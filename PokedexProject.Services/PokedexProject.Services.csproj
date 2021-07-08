@@ -54,11 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PokemonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrainerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PokedexProject.Data\PokedexProject.Data.csproj">
+      <Project>{e5b859d6-d7c0-4077-9cfa-9f1f43f1f315}</Project>
+      <Name>PokedexProject.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PokedexProject.Models\PokedexProject.Models.csproj">
+      <Project>{9747ef0d-9765-4615-bf00-0fabb0619bd8}</Project>
+      <Name>PokedexProject.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
