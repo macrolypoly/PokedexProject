@@ -240,6 +240,7 @@
     <Content Include="Views\Trainer\Create.cshtml" />
     <Content Include="Views\Pokemon\Create.cshtml" />
     <Content Include="Views\Pokemon\Index.cshtml" />
+    <Content Include="Views\Pokemon\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

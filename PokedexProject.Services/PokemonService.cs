@@ -52,5 +52,39 @@ namespace PokedexProject.Services
                 return query.ToArray();
             }
         }
+        public PokemonDetail GetPokemonById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Pokemon
+                    .Single(e => e.PokemonId == id);
+                return
+                    new PokemonDetail
+                    {
+                        PokemonId = entity.PokemonId,
+                        Name = entity.Name,
+                        Type = (int)entity.Type,
+                        Type2 = (int)entity.Type2
+                    };
+            }
+        }
+        public bool EditPokemon(PokemonEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Pokemon
+                    .Single(e => e.PokemonId == model.PokemonId);
+                entity.PokemonId = model.PokemonId;
+                entity.Name = model.PokemonName;
+                entity.Type = (PokedexProject.Data.PokeType)model.Type;
+                entity.Type2 = (PokedexProject.Data.PokeType)model.Type2;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

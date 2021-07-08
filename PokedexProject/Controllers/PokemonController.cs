@@ -43,6 +43,27 @@ namespace PokedexProject.Controllers
 
             return View(model);
         }
+        public ActionResult Edit(int id)
+        {
+            var service = CreatePokemonService();
+            var detail = service.GetPokemonById(id);
+            var model =
+                new PokemonEdit
+                {
+                    PokemonId = detail.PokemonId,
+                    PokemonName = detail.Name,
+                    Type = detail.Type,
+                    Type2 = detail.Type2
+                };
+            return View(model);
+        }
+        public ActionResult Details(int id)
+        {
+            var svc = CreatePokemonService();
+            var model = svc.GetPokemonById(id);
+
+            return View(model);
+        }
 
         private PokemonService CreatePokemonService()
         {
