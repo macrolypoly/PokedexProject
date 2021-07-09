@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
+using PokedexProject.Models;
+using PokedexProject.Models.TrainerItems;
+using PokedexProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +35,7 @@ namespace PokedexProject.Controllers
 
             if (service.CreateTrainerItems(model))
             {
-                TempData["SaveResult"] = "Your TrainerItems was added.";
+                TempData["SaveResult"] = "TrainerItems was added.";
                 return RedirectToAction("Index");
             };
 
@@ -47,10 +50,10 @@ namespace PokedexProject.Controllers
             var model =
                 new TrainerItemsEdit
                 {
-                    OwnerId = detail.OwnerId,
-                    TrainerItemsId = detail.TrainerItemsId,
-                    Name = detail.Name,
-                    ProfileCreated = detail.ProfileCreated
+               ItemId = detail.ItemId,
+               TrainerId = detail.TrainerId,
+               TrainerName = detail.TrainerName,
+               Count = detail.Count
                 };
             return View(model);
         }
@@ -59,7 +62,7 @@ namespace PokedexProject.Controllers
         public ActionResult Edit(int id, TrainerItemsEdit model)
         {
             if (!ModelState.IsValid) return View(model);
-            if (model.TrainerItemsId != id)
+            if (model.ItemId != id)
             {
                 ModelState.AddModelError("", "Id Mismatch");
                 return View(model);
@@ -68,7 +71,7 @@ namespace PokedexProject.Controllers
 
             if (service.EditTrainerItems(model))
             {
-                TempData["SaveResult"] = "Your TrainerItems was updated.";
+                TempData["SaveResult"] = "TrainerItems was updated.";
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", "TrainerItems could not be updated.");

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Models
 {
-    public class ItemListItem
+    public class ItemEdit
     {
         public Guid OwnerId { get; set; }
         public int ItemId { get; set; }
+        public string ItemName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

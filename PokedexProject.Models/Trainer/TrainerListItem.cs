@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokedexProject.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Models
 {
-    public class TrainerCreate
+    public class TrainerListItem
     {
         [Key]
         public Guid OwnerId { get; set; }
         [Required]
         public int TrainerId { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string TrainerName { get; set; }
         [Required]
         public DateTimeOffset ProfileCreated { get; set; }
     }

@@ -10,7 +10,7 @@ namespace PokedexProject.Models
     {
         public Guid OwnerId { get; set; }
         public int PokemonId { get; set; }
-        public string Name { get; set; }
+        public string PokemonName { get; set; }
         public int Type { get; set; }
         public int Type2 { get; set; }
 

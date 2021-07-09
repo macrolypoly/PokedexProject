@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PokedexProject.Data;
+using PokedexProject.Models;
+using PokedexProject.Models.TrainerItems;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +22,10 @@ namespace PokedexProject.Services
             var entity =
                 new TrainerItems()
                 {
-                    OwnerId = _userId,
-                    TrainerItemsId = model.TrainerItemsId,
-                    Name = model.Name,
-                    Type = (PokedexProject.Data.PokeType)model.Type,
-                    Type2 = (PokedexProject.Data.PokeType)model.Type2
+                   ItemId = model.ItemId,
+                   TrainerId = model.TrainerId,
+                   TrainerName = model.TrainerName,
+                   Count = model.Count
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -42,10 +44,10 @@ namespace PokedexProject.Services
                         e =>
                         new TrainerItemsListItem
                         {
-                            TrainerItemsId = e.TrainerItemsId,
-                            Name = e.Name,
-                            Type = (int)e.Type,
-                            Type2 = (int)e.Type2
+                            ItemId = e.ItemId,
+                            TrainerId = e.TrainerId,
+                            TrainerName = e.TrainerName,
+                            Count = e.Count
                         }
                         );
                 return query.ToArray();
@@ -58,14 +60,14 @@ namespace PokedexProject.Services
                 var entity =
                     ctx
                     .TrainerItems
-                    .Single(e => e.TrainerItemsId == id);
+                    .Single(e => e.ItemId == id);
                 return
                     new TrainerItemsDetail
                     {
-                        TrainerItemsId = entity.TrainerItemsId,
-                        Name = entity.Name,
-                        Type = (int)entity.Type,
-                        Type2 = (int)entity.Type2
+                        ItemId = entity.ItemId,
+                        TrainerId = entity.TrainerId,
+                        TrainerName = entity.TrainerName,
+                        Count = entity.Count
                     };
             }
         }
@@ -76,23 +78,23 @@ namespace PokedexProject.Services
                 var entity =
                     ctx
                     .TrainerItems
-                    .Single(e => e.TrainerItemsId == model.TrainerItemsId && e.OwnerId == _userId);
-                entity.TrainerItemsId = model.TrainerItemsId;
-                entity.Name = model.TrainerItemsName;
-                entity.Type = (PokedexProject.Data.PokeType)model.Type;
-                entity.Type2 = (PokedexProject.Data.PokeType)model.Type2;
+                    .Single(e => e.ItemId == model.ItemId);
+                entity.ItemId = model.ItemId;
+                entity.TrainerId = model.TrainerId;
+                entity.TrainerName = model.TrainerName;
+                entity.Count = model.Count;
 
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteTrainerItems(int pokeId)
+        public bool DeleteTrainerItems(int itemId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .TrainerItems
-                    .Single(e => e.TrainerItemsId == pokeId && e.OwnerId == _userId);
+                    .Single(e => e.ItemId == itemId);
                 ctx.TrainerItems.Remove(entity);
 
                 return ctx.SaveChanges() == 1;

@@ -35,7 +35,7 @@ namespace PokedexProject.Data
         [Key]
         public int PokemonId { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string PokemonName { get; set; }
         [Required]
         [Display(Name = "Pokemon Type")]
         public PokeType Type { get; set; }

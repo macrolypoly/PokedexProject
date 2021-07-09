@@ -51,7 +51,7 @@ namespace PokedexProject.Controllers
                 new PokemonEdit
                 {
                     PokemonId = detail.PokemonId,
-                    PokemonName = detail.Name,
+                    PokemonName = detail.PokemonName,
                     Type = detail.Type,
                     Type2 = detail.Type2
                 };

@@ -10,7 +10,7 @@ namespace PokedexProject.Data
     {
         public Guid OwnerId { get; set; }
         public int TrainerId { get; set; }
-        public string Name { get; set; }
+        public string TrainerName { get; set; }
         public ICollection<Pokemon> PokemonCaught { get; set; }
         public ICollection<Item> ListOfItems { get; set; }
         public DateTimeOffset ProfileCreated { get; set; }

@@ -23,7 +23,7 @@ namespace PokedexProject.Services
                 {
                     OwnerId = _userId,
                     TrainerId = model.TrainerId,
-                    Name = model.Name,
+                    TrainerName = model.TrainerName,
                     ProfileCreated = DateTimeOffset.Now
                 };
             using (var ctx = new ApplicationDbContext())
@@ -45,7 +45,7 @@ namespace PokedexProject.Services
                         {
                             OwnerId = _userId,
                             TrainerId = e.TrainerId,
-                            Name = e.Name,
+                            TrainerName = e.TrainerName,
                             ProfileCreated = e.ProfileCreated
                         }
                         );
@@ -65,7 +65,7 @@ namespace PokedexProject.Services
                     {
                         OwnerId = entity.OwnerId,
                         TrainerId = entity.TrainerId,
-                        Name = entity.Name,
+                        TrainerName = entity.TrainerName,
                         ProfileCreated = entity.ProfileCreated
                     };
             }
@@ -80,7 +80,7 @@ namespace PokedexProject.Services
                     .Single(e => e.TrainerId == model.TrainerId);
                 entity.OwnerId = model.OwnerId;
                 entity.TrainerId = model.TrainerId;
-                entity.Name = model.Name;
+                entity.TrainerName = model.TrainerName;
                 entity.ProfileCreated = DateTimeOffset.Now;
 
                 return ctx.SaveChanges() == 1;

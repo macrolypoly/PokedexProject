@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Models
 {
-    public class TrainerEdit
+    public class TrainerItemsCreate
     {
         [Key]
-        public Guid OwnerId { get; set; }
-        [Required]
+        public int ItemId { get; set; }
+        public string ItemName { get; set; }
         public int TrainerId { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public DateTimeOffset ProfileCreated { get; set; }
+        public string TrainerName { get; set; }
+        public int Count { get; set; }
     }
 }

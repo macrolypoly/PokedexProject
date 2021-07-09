@@ -23,7 +23,7 @@ namespace PokedexProject.Services
                 {
                    OwnerId = model.OwnerId,
                    ItemId = model.ItemId,
-                   Name = model.Name,
+                   ItemName = model.ItemName,
                    Description = model.Description
                 };
             using (var ctx = new ApplicationDbContext())
@@ -45,7 +45,7 @@ namespace PokedexProject.Services
                         {
                             OwnerId = e.OwnerId,
                             ItemId = e.ItemId,
-                            Name = e.Name,
+                            ItemName = e.ItemName,
                             Description = e.Description
                         }
                         );
@@ -65,7 +65,7 @@ namespace PokedexProject.Services
                     {
                         OwnerId = entity.OwnerId,
                         ItemId = entity.ItemId,
-                        Name = entity.Name,
+                        ItemName = entity.ItemName,
                         Description = entity.Description
                     };
             }
@@ -80,7 +80,7 @@ namespace PokedexProject.Services
                     .Single(e => e.ItemId == model.ItemId && e.OwnerId == _userId);
                 entity.OwnerId = model.OwnerId;
                 entity.ItemId = model.ItemId;
-                entity.Name = model.Name;
+                entity.ItemName = model.ItemName;
                 entity.Description = model.Description;
 
                 return ctx.SaveChanges() == 1;

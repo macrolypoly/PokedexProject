@@ -51,7 +51,7 @@ namespace PokedexProject.Controllers
                 {
                     OwnerId = detail.OwnerId,
                     TrainerId = detail.TrainerId,
-                    Name = detail.Name,
+                    TrainerName = detail.TrainerName,
                     ProfileCreated = detail.ProfileCreated
                 };
             return View(model);

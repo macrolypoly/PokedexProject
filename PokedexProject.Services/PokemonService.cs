@@ -23,7 +23,7 @@ namespace PokedexProject.Services
                 {
                     OwnerId = _userId,
                     PokemonId = model.PokemonId,
-                    Name = model.Name,
+                    PokemonName = model.PokemonName,
                     Type = (PokedexProject.Data.PokeType)model.Type,
                     Type2 = (PokedexProject.Data.PokeType)model.Type2
                 };
@@ -45,7 +45,7 @@ namespace PokedexProject.Services
                         new PokemonListItem
                         {
                             PokemonId = e.PokemonId,
-                            Name = e.Name,
+                            PokemonName = e.PokemonName,
                             Type = (int)e.Type,
                             Type2 = (int)e.Type2
                         }
@@ -65,7 +65,7 @@ namespace PokedexProject.Services
                     new PokemonDetail
                     {
                         PokemonId = entity.PokemonId,
-                        Name = entity.Name,
+                        PokemonName = entity.PokemonName,
                         Type = (int)entity.Type,
                         Type2 = (int)entity.Type2
                     };
@@ -80,7 +80,7 @@ namespace PokedexProject.Services
                     .Pokemon
                     .Single(e => e.PokemonId == model.PokemonId && e.OwnerId == _userId);
                 entity.PokemonId = model.PokemonId;
-                entity.Name = model.PokemonName;
+                entity.PokemonName = model.PokemonName;
                 entity.Type = (PokedexProject.Data.PokeType)model.Type;
                 entity.Type2 = (PokedexProject.Data.PokeType)model.Type2;
 

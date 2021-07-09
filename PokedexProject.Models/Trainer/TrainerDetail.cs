@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Models
 {
-   public class ItemCreate
+    public class TrainerDetail
     {
         public Guid OwnerId { get; set; }
-        public int ItemId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int TrainerId { get; set; }
+        public string TrainerName { get; set; }
+        public DateTimeOffset ProfileCreated { get; set; }
     }
 }
