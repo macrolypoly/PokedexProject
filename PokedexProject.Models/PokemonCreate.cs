@@ -31,6 +31,7 @@ namespace PokedexProject.Models
     //}
     public class PokemonCreate
     {
+        public Guid OwnerId { get; set; }
         [Key]
         public int PokemonId { get; set; }
         [Required]

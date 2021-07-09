@@ -31,6 +31,7 @@ namespace PokedexProject.Data
     }
     public class Pokemon
     {
+        public Guid OwnerId { get; set; }
         [Key]
         public int PokemonId { get; set; }
         [Required]

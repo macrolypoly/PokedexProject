@@ -54,12 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RouteCreate.cs" />
+    <Compile Include="ItemCreate.cs" />
+    <Compile Include="RouteDetail.cs" />
+    <Compile Include="ItemDetail.cs" />
+    <Compile Include="RouteEdit.cs" />
+    <Compile Include="ItemEdit.cs" />
+    <Compile Include="RouteListItem.cs" />
+    <Compile Include="ItemListItem.cs" />
     <Compile Include="PokemonCreate.cs" />
     <Compile Include="PokemonDetail.cs" />
     <Compile Include="PokemonEdit.cs" />
     <Compile Include="PokemonListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrainerCreate.cs" />
+    <Compile Include="TrainerDetail.cs" />
+    <Compile Include="TrainerEdit.cs" />
+    <Compile Include="TrainerItemsCreate.cs" />
     <Compile Include="TrainerListItem.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,8 +9,7 @@ namespace PokedexProject.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "PokedexProject.Data.ApplicationDbContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(PokedexProject.Data.ApplicationDbContext context)

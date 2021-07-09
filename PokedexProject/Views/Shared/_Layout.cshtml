@@ -24,10 +24,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Pokemon", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Routes", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Inventory", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Profile", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Pokemon", "Index", "Pokemon")</li>
+                        <li>@Html.ActionLink("Routes", "Index", "Routes")</li>
+                        <li>@Html.ActionLink("Inventory", "Index", "")</li>
+                        <li>@Html.ActionLink("Create Trainer", "Index", "Trainer")</li>
                     }
 
                 </ul>

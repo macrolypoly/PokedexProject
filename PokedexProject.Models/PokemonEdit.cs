@@ -10,6 +10,7 @@ namespace PokedexProject.Models
 {
     public class PokemonEdit
     {
+        public Guid OwnerId { get; set; }
         [Key]
         public int PokemonId {get;set;}
         [Required]

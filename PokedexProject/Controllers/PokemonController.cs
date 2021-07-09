@@ -57,6 +57,46 @@ namespace PokedexProject.Controllers
                 };
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, PokemonEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            if(model.PokemonId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+            var service = CreatePokemonService();
+
+            if (service.EditPokemon(model))
+            {
+                TempData["SaveResult"] = "Your pokemon was updated.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Pokemon could not be updated.");
+            return View(model);
+        }
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreatePokemonService();
+            var model = svc.GetPokemonById(id);
+
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePokemon(int id)
+        {
+            var service = CreatePokemonService();
+
+            service.DeletePokemon(id);
+
+            TempData["SaveResult"] = "Pokemon was deleted.";
+            return RedirectToAction("Index");
+        }
         public ActionResult Details(int id)
         {
             var svc = CreatePokemonService();
@@ -64,6 +104,7 @@ namespace PokedexProject.Controllers
 
             return View(model);
         }
+
 
         private PokemonService CreatePokemonService()
         {

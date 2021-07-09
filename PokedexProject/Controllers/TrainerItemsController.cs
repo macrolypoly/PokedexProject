@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using PokedexProject.Models;
-using PokedexProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +7,14 @@ using System.Web.Mvc;
 
 namespace PokedexProject.Controllers
 {
-    public class TrainerController : Controller
+    public class TrainerItemsController : Controller
     {
-        // GET: Trainer
+        // GET: TrainerItems
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new TrainerService(userId);
-            var model = service.GetTrainer();
+            var service = new TrainerItemsService(userId);
+            var model = service.GetTrainerItems();
 
             return View(model);
         }
@@ -26,31 +24,31 @@ namespace PokedexProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TrainerCreate model)
+        public ActionResult Create(TrainerItemsCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateTrainerService();
+            var service = CreateTrainerItemsService();
 
-            if (service.CreateTrainer(model))
+            if (service.CreateTrainerItems(model))
             {
-                TempData["SaveResult"] = "Your Trainer was added.";
+                TempData["SaveResult"] = "Your TrainerItems was added.";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "Trainer could not be added.");
+            ModelState.AddModelError("", "TrainerItems could not be added.");
 
             return View(model);
         }
         public ActionResult Edit(int id)
         {
-            var service = CreateTrainerService();
-            var detail = service.GetTrainerById(id);
+            var service = CreateTrainerItemsService();
+            var detail = service.GetTrainerItemsById(id);
             var model =
-                new TrainerEdit
+                new TrainerItemsEdit
                 {
                     OwnerId = detail.OwnerId,
-                    TrainerId = detail.TrainerId,
+                    TrainerItemsId = detail.TrainerItemsId,
                     Name = detail.Name,
                     ProfileCreated = detail.ProfileCreated
                 };
@@ -58,57 +56,57 @@ namespace PokedexProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, TrainerEdit model)
+        public ActionResult Edit(int id, TrainerItemsEdit model)
         {
             if (!ModelState.IsValid) return View(model);
-            if (model.TrainerId != id)
+            if (model.TrainerItemsId != id)
             {
                 ModelState.AddModelError("", "Id Mismatch");
                 return View(model);
             }
-            var service = CreateTrainerService();
+            var service = CreateTrainerItemsService();
 
-            if (service.EditTrainer(model))
+            if (service.EditTrainerItems(model))
             {
-                TempData["SaveResult"] = "Your Trainer was updated.";
+                TempData["SaveResult"] = "Your TrainerItems was updated.";
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Trainer could not be updated.");
+            ModelState.AddModelError("", "TrainerItems could not be updated.");
             return View(model);
         }
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateTrainerService();
-            var model = svc.GetTrainerById(id);
+            var svc = CreateTrainerItemsService();
+            var model = svc.GetTrainerItemsById(id);
 
             return View(model);
         }
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteTrainer(int id)
+        public ActionResult DeleteTrainerItems(int id)
         {
-            var service = CreateTrainerService();
+            var service = CreateTrainerItemsService();
 
-            service.DeleteTrainer(id);
+            service.DeleteTrainerItems(id);
 
-            TempData["SaveResult"] = "Trainer was deleted.";
+            TempData["SaveResult"] = "TrainerItems was deleted.";
             return RedirectToAction("Index");
         }
         public ActionResult Details(int id)
         {
-            var svc = CreateTrainerService();
-            var model = svc.GetTrainerById(id);
+            var svc = CreateTrainerItemsService();
+            var model = svc.GetTrainerItemsById(id);
 
             return View(model);
         }
 
 
-        private TrainerService CreateTrainerService()
+        private TrainerItemsService CreateTrainerItemsService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new TrainerService(userId);
+            var service = new TrainerItemsService(userId);
             return service;
         }
     }

@@ -1,6 +1,4 @@
-﻿using PokedexProject.Data;
-using PokedexProject.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,43 +6,43 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Services
 {
-    public class PokemonService
+    public class TrainerItemsService
     {
         private readonly Guid _userId;
 
-        public PokemonService(Guid userId)
+        public TrainerItemsService(Guid userId)
         {
             _userId = userId;
         }
-        public bool CreatePokemon(PokemonCreate model)
+        public bool CreateTrainerItems(TrainerItemsCreate model)
         {
             var entity =
-                new Pokemon()
+                new TrainerItems()
                 {
                     OwnerId = _userId,
-                    PokemonId = model.PokemonId,
+                    TrainerItemsId = model.TrainerItemsId,
                     Name = model.Name,
                     Type = (PokedexProject.Data.PokeType)model.Type,
                     Type2 = (PokedexProject.Data.PokeType)model.Type2
                 };
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Pokemon.Add(entity);
+                ctx.TrainerItems.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-        public IEnumerable<PokemonListItem> GetPokemon()
+        public IEnumerable<TrainerItemsListItem> GetTrainerItems()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                    .Pokemon
+                    .TrainerItems
                     .Select(
                         e =>
-                        new PokemonListItem
+                        new TrainerItemsListItem
                         {
-                            PokemonId = e.PokemonId,
+                            TrainerItemsId = e.TrainerItemsId,
                             Name = e.Name,
                             Type = (int)e.Type,
                             Type2 = (int)e.Type2
@@ -53,49 +51,49 @@ namespace PokedexProject.Services
                 return query.ToArray();
             }
         }
-        public PokemonDetail GetPokemonById(int id)
+        public TrainerItemsDetail GetTrainerItemsById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Pokemon
-                    .Single(e => e.PokemonId == id);
+                    .TrainerItems
+                    .Single(e => e.TrainerItemsId == id);
                 return
-                    new PokemonDetail
+                    new TrainerItemsDetail
                     {
-                        PokemonId = entity.PokemonId,
+                        TrainerItemsId = entity.TrainerItemsId,
                         Name = entity.Name,
                         Type = (int)entity.Type,
                         Type2 = (int)entity.Type2
                     };
             }
         }
-        public bool EditPokemon(PokemonEdit model)
+        public bool EditTrainerItems(TrainerItemsEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Pokemon
-                    .Single(e => e.PokemonId == model.PokemonId && e.OwnerId == _userId);
-                entity.PokemonId = model.PokemonId;
-                entity.Name = model.PokemonName;
+                    .TrainerItems
+                    .Single(e => e.TrainerItemsId == model.TrainerItemsId && e.OwnerId == _userId);
+                entity.TrainerItemsId = model.TrainerItemsId;
+                entity.Name = model.TrainerItemsName;
                 entity.Type = (PokedexProject.Data.PokeType)model.Type;
                 entity.Type2 = (PokedexProject.Data.PokeType)model.Type2;
 
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeletePokemon(int pokeId)
+        public bool DeleteTrainerItems(int pokeId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Pokemon
-                    .Single(e => e.PokemonId == pokeId && e.OwnerId == _userId);
-                ctx.Pokemon.Remove(entity);
+                    .TrainerItems
+                    .Single(e => e.TrainerItemsId == pokeId && e.OwnerId == _userId);
+                ctx.TrainerItems.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }

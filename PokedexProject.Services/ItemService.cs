@@ -8,93 +8,93 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Services
 {
-    public class TrainerService
+   public class ItemService
     {
         private readonly Guid _userId;
 
-        public TrainerService(Guid userId)
+        public ItemService(Guid userId)
         {
             _userId = userId;
         }
-        public bool CreateTrainer(TrainerCreate model)
+        public bool CreateItem(ItemCreate model)
         {
             var entity =
-                new Trainer()
+                new Item()
                 {
-                    OwnerId = _userId,
-                    TrainerId = model.TrainerId,
-                    Name = model.Name,
-                    ProfileCreated = DateTimeOffset.Now
+                   OwnerId = model.OwnerId,
+                   ItemId = model.ItemId,
+                   Name = model.Name,
+                   Description = model.Description
                 };
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Trainers.Add(entity);
+                ctx.Items.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-        public IEnumerable<TrainerListItem> GetTrainer()
+        public IEnumerable<ItemListItem> GetItem()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                    .Trainers
+                    .Items
                     .Select(
                         e =>
-                        new TrainerListItem
+                        new ItemListItem
                         {
-                            OwnerId = _userId,
-                            TrainerId = e.TrainerId,
+                            OwnerId = e.OwnerId,
+                            ItemId = e.ItemId,
                             Name = e.Name,
-                            ProfileCreated = e.ProfileCreated
+                            Description = e.Description
                         }
                         );
                 return query.ToArray();
             }
         }
-        public TrainerDetail GetTrainerById(int id)
+        public ItemDetail GetItemById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Trainers
-                    .Single(e => e.TrainerId == id);
+                    .Items
+                    .Single(e => e.ItemId == id);
                 return
-                    new TrainerDetail
+                    new ItemDetail
                     {
                         OwnerId = entity.OwnerId,
-                        TrainerId = entity.TrainerId,
+                        ItemId = entity.ItemId,
                         Name = entity.Name,
-                        ProfileCreated = entity.ProfileCreated
+                        Description = entity.Description
                     };
             }
         }
-        public bool EditTrainer(TrainerEdit model)
+        public bool EditItem(ItemEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Trainers
-                    .Single(e => e.TrainerId == model.TrainerId);
+                    .Items
+                    .Single(e => e.ItemId == model.ItemId && e.OwnerId == _userId);
                 entity.OwnerId = model.OwnerId;
-                entity.TrainerId = model.TrainerId;
+                entity.ItemId = model.ItemId;
                 entity.Name = model.Name;
-                entity.ProfileCreated = DateTimeOffset.Now;
+                entity.Description = model.Description;
 
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteTrainer(int pokeId)
+        public bool DeleteItem(int pokeId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Trainers
-                    .Single(e => e.TrainerId == pokeId);
-                ctx.Trainers.Remove(entity);
+                    .Items
+                    .Single(e => e.ItemId == pokeId && e.OwnerId == _userId);
+                ctx.Items.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
