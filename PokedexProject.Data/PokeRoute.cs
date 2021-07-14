@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Data
 {
-    public class Route
+    public class PokeRoute
     {
         public Guid OwnerId { get; set; }
         [Key]
@@ -16,7 +16,7 @@ namespace PokedexProject.Data
         public ICollection<Item> ListOfItems { get; set; }
         public string RouteName { get; set; }
 
-        public Route()
+        public PokeRoute()
         {
             RoutePokemon = new HashSet<Pokemon>();
             ListOfItems = new HashSet<Item>();

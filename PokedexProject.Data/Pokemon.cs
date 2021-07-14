@@ -42,6 +42,11 @@ namespace PokedexProject.Data
         [Required]
         [Display(Name = "Second Type")]
         public PokeType Type2 { get; set; }
+        public ICollection<PokeRoute> RoutesFound { get; set; }
+        public Pokemon()
+        {
+            RoutesFound = new HashSet<PokeRoute>();
+        }
     }
    
 

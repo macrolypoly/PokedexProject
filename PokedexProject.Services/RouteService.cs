@@ -3,8 +3,6 @@ using PokedexProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokedexProject.Services
 {
@@ -19,9 +17,9 @@ namespace PokedexProject.Services
         public bool CreateRoute(RouteCreate model)
         {
             var entity =
-                new Route()
+                new PokeRoute()
                 {
-                    OwnerId = model.OwnerId,
+                    OwnerId = _userId,
                     RouteId = model.RouteId,
                     RouteName = model.RouteName,
                     ListOfItems = model.ListOfItems,
@@ -44,7 +42,7 @@ namespace PokedexProject.Services
                         e =>
                         new RouteListItem
                         {
-                           OwnerId = e.OwnerId,
+                           OwnerId = _userId,
                            RouteId = e.RouteId,
                            RouteName = e.RouteName,
                            ListOfItems = e.ListOfItems,
@@ -65,7 +63,7 @@ namespace PokedexProject.Services
                 return
                     new RouteDetail
                     {
-                       OwnerId = entity.OwnerId,
+                       OwnerId = _userId,
                        RouteId = entity.RouteId,
                        RouteName = entity.RouteName,
                        ListOfItems = entity.ListOfItems,
@@ -97,11 +95,12 @@ namespace PokedexProject.Services
                 var entity =
                     ctx
                     .Routes
-                    .Single(e => e.RouteId == pokeId && e.OwnerId == _userId);
+                    .FirstOrDefault(e => e.OwnerId == _userId);
                 ctx.Routes.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }
         }
+        
     }
 }

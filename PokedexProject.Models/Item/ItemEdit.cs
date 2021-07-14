@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokedexProject.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace PokedexProject.Models
         public Guid OwnerId { get; set; }
         public int ItemId { get; set; }
         public string ItemName { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
+        
     }
 }

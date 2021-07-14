@@ -23,8 +23,8 @@ namespace PokedexProject.Services
                 new TrainerItems()
                 {
                    ItemId = model.ItemId,
+                   ItemName = model.ItemName,
                    TrainerId = model.TrainerId,
-                   TrainerName = model.TrainerName,
                    Count = model.Count
                 };
             using (var ctx = new ApplicationDbContext())
@@ -45,8 +45,9 @@ namespace PokedexProject.Services
                         new TrainerItemsListItem
                         {
                             ItemId = e.ItemId,
+                            ItemName = e.Item.ItemName,
                             TrainerId = e.TrainerId,
-                            TrainerName = e.TrainerName,
+                            TrainerName = e.Trainer.TrainerName,
                             Count = e.Count
                         }
                         );
@@ -65,8 +66,9 @@ namespace PokedexProject.Services
                     new TrainerItemsDetail
                     {
                         ItemId = entity.ItemId,
+                        ItemName = entity.Item.ItemName,
                         TrainerId = entity.TrainerId,
-                        TrainerName = entity.TrainerName,
+                        TrainerName = entity.Trainer.TrainerName,
                         Count = entity.Count
                     };
             }
@@ -79,9 +81,6 @@ namespace PokedexProject.Services
                     ctx
                     .TrainerItems
                     .Single(e => e.ItemId == model.ItemId);
-                entity.ItemId = model.ItemId;
-                entity.TrainerId = model.TrainerId;
-                entity.TrainerName = model.TrainerName;
                 entity.Count = model.Count;
 
                 return ctx.SaveChanges() == 1;

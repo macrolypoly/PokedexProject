@@ -97,6 +97,7 @@ namespace PokedexProject.Controllers
             TempData["SaveResult"] = "Route was deleted.";
             return RedirectToAction("Index");
         }
+
         public ActionResult Details(int id)
         {
             var svc = CreateRouteService();
@@ -104,8 +105,6 @@ namespace PokedexProject.Controllers
 
             return View(model);
         }
-
-
         private RouteService CreateRouteService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

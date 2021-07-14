@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
 using PokedexProject.Models;
+using PokedexProject.Models.Route;
 using PokedexProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -42,20 +44,20 @@ namespace PokedexProject.Controllers
 
             return View(model);
         }
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             var service = CreateItemService();
-            var detail = service.GetItemById(id);
-            var model =
-                new ItemEdit
-                {
-                   
-                };
-            return View(model);
+            var item = service.GetItemById(id ?? default );
+            //ViewBag.RouteList = new RouteService(Guid.Parse(User.Identity.GetUserId())).GetRoute();
+            return View(item);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ItemEdit model)
+        public ActionResult EditItem(int id, ItemEdit model)
         {
             if (!ModelState.IsValid) return View(model);
             if (model.ItemId != id)
@@ -73,6 +75,32 @@ namespace PokedexProject.Controllers
             ModelState.AddModelError("", "Item could not be updated.");
             return View(model);
         }
+        public ActionResult AddRouteToItem(int Id)
+        {
+            ViewBag.ID = Id;
+            ViewBag.RouteList = new RouteService(Guid.Parse(User.Identity.GetUserId())).GetRoute();
+            return View();
+        }
+        public ActionResult EditRoutes(int id, RouteListCreate model)
+        {
+           
+            if (!ModelState.IsValid) return View(model);
+            if (model.ItemId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+            var service = CreateItemService();
+
+            if (service.AddRoute(model))
+            {
+                TempData["SaveResult"] = "Route was added.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "route could not be added.");
+            return View(model);
+        }
+       
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {

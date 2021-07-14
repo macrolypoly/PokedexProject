@@ -25,8 +25,8 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Pokemon", "Index", "Pokemon")</li>
-                        <li>@Html.ActionLink("Routes", "Index", "Routes")</li>
-                        <li>@Html.ActionLink("Inventory", "Index", "TrainerItems")</li>
+                        <li>@Html.ActionLink("Routes", "Index", "Route")</li>
+                        <li>@Html.ActionLink("Create Items", "Index", "Item")</li>
                         <li>@Html.ActionLink("Your Pokemon", "Index", "TrainerPokemon")</li>
                         <li>@Html.ActionLink("Create Trainer", "Index", "Trainer")</li>
                     }

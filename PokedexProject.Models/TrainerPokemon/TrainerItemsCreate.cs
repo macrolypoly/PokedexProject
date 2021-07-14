@@ -13,7 +13,6 @@ namespace PokedexProject.Models
         public int PokemonId { get; set; }
         public string PokemonName { get; set; }
         public int TrainerId { get; set; }
-        public string TrainerName { get; set; }
         public int Count { get; set; }
     }
 }

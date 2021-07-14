@@ -56,10 +56,22 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Migrations\202107090138294_ex.cs" />
+    <Compile Include="Migrations\202107090138294_ex.Designer.cs">
+      <DependentUpon>202107090138294_ex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107132312433_ex2.cs" />
+    <Compile Include="Migrations\202107132312433_ex2.Designer.cs">
+      <DependentUpon>202107132312433_ex2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107140042118_editmodel.cs" />
+    <Compile Include="Migrations\202107140042118_editmodel.Designer.cs">
+      <DependentUpon>202107140042118_editmodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Route.cs" />
+    <Compile Include="PokeRoute.cs" />
     <Compile Include="Trainer.cs" />
     <Compile Include="TrainerItems.cs" />
     <Compile Include="TrainerPokemon.cs" />
@@ -67,6 +79,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202107090138294_ex.resx">
+      <DependentUpon>202107090138294_ex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107132312433_ex2.resx">
+      <DependentUpon>202107132312433_ex2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107140042118_editmodel.resx">
+      <DependentUpon>202107140042118_editmodel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿@model PokedexProject.Models.ItemDetail
+﻿@model PokedexProject.Models.TrainerItems.TrainerItemsDetail
 
 @{
     ViewBag.Title = "Delete";
@@ -8,25 +8,9 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>ItemDetail</h4>
+    <h4>TrainerItemsDetail</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.OwnerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OwnerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ItemId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ItemId)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.ItemName)
         </dt>
@@ -36,11 +20,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.TrainerId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.TrainerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
         </dd>
 
     </dl>

@@ -261,6 +261,12 @@
     <Content Include="Views\Route\Details.cshtml" />
     <Content Include="Views\TrainerItems\Index.cshtml" />
     <Content Include="Views\TrainerItems\Create.cshtml" />
+    <Content Include="Views\TrainerItems\Edit.cshtml" />
+    <Content Include="Views\TrainerItems\Delete.cshtml" />
+    <Content Include="Views\TrainerItems\Details.cshtml" />
+    <Content Include="Views\Route\AddItem.cshtml" />
+    <Content Include="Views\Item\EditRoute.cshtml" />
+    <Content Include="Views\Item\AddRouteToItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

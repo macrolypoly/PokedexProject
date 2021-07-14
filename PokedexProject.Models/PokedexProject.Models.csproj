@@ -60,6 +60,7 @@
     <Compile Include="Item\ItemDetail.cs" />
     <Compile Include="Route\RouteEdit.cs" />
     <Compile Include="Item\ItemEdit.cs" />
+    <Compile Include="Route\RouteListCreate.cs" />
     <Compile Include="Route\RouteListItem.cs" />
     <Compile Include="Item\ItemListItem.cs" />
     <Compile Include="Pokemon\PokemonCreate.cs" />

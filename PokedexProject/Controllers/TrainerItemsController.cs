@@ -50,9 +50,6 @@ namespace PokedexProject.Controllers
             var model =
                 new TrainerItemsEdit
                 {
-               ItemId = detail.ItemId,
-               TrainerId = detail.TrainerId,
-               TrainerName = detail.TrainerName,
                Count = detail.Count
                 };
             return View(model);

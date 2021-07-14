@@ -1,5 +1,6 @@
 ﻿using PokedexProject.Data;
 using PokedexProject.Models;
+using PokedexProject.Models.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace PokedexProject.Services
             var entity =
                 new Item()
                 {
-                   OwnerId = model.OwnerId,
+                   OwnerId = _userId,
                    ItemId = model.ItemId,
                    ItemName = model.ItemName,
                    Description = model.Description
@@ -86,6 +87,19 @@ namespace PokedexProject.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public bool AddRoute(RouteListCreate model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Items.SingleOrDefault(e => e.ItemId == model.ItemId);
+                var route =
+                    ctx.Routes.SingleOrDefault(r => r.RouteId == model.RouteId);
+                entity.ListOfRoutes.Add(route);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
         public bool DeleteItem(int pokeId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -93,7 +107,7 @@ namespace PokedexProject.Services
                 var entity =
                     ctx
                     .Items
-                    .Single(e => e.ItemId == pokeId && e.OwnerId == _userId);
+                    .SingleOrDefault(e => e.ItemId == pokeId && e.OwnerId == _userId);
                 ctx.Items.Remove(entity);
 
                 return ctx.SaveChanges() == 1;

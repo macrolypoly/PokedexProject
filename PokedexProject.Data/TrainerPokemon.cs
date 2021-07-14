@@ -12,12 +12,9 @@ namespace PokedexProject.Data
     {
         [Key, ForeignKey("Pokemon")]
         public int PokemonId { get; set; }
-        [ForeignKey("PokemonName")]
-        public string PokemonName { get; set; }
+        public string PokemonName { get;set; }
         [ForeignKey("Trainer")]
         public int TrainerId { get; set; }
-        [ForeignKey("TrainerName")]
-        public string TrainerName { get; set; }
         public int Count { get; set; }
         public virtual Trainer Trainer { get; set; }
         public virtual Pokemon Pokemon { get; set; }

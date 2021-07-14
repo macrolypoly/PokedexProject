@@ -14,21 +14,31 @@
         <th>
             @Html.DisplayNameFor(model => model.RouteName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutePokemon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListOfItems)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.OwnerId)
+            @Html.DisplayFor(modelItem => item.RouteName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RouteName)
+            @Html.DisplayFor(modelItem => item.RoutePokemon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ListOfItems)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RouteId }) |
             @Html.ActionLink("Details", "Details", new { id=item.RouteId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.RouteId })
+            @Html.ActionLink("Add Pokemon To Route", "AddPokemon", new { id=item.RouteId})
         </td>
     </tr>
 }

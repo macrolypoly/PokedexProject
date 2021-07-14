@@ -12,5 +12,11 @@ namespace PokedexProject.Data
         public int ItemId { get; set; }
         public string ItemName { get; set; }
         public string Description { get; set; }
+
+       public ICollection<PokeRoute> ListOfRoutes { get; set; }
+        public Item()
+        {
+            ListOfRoutes = new HashSet<PokeRoute>();
+        }
     }
 }

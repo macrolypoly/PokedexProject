@@ -34,7 +34,7 @@ namespace PokedexProject.Data
         public DbSet<Pokemon> Pokemon { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
-        public DbSet<Route> Routes { get; set; }
+        public DbSet<PokeRoute> Routes { get; set; }
         public DbSet<TrainerItems> TrainerItems { get; set; }
         public DbSet<TrainerPokemon> TrainerPokemon { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
