@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokedexProject.Models
+namespace PokedexProject.Models.Item
 {
-    public class ItemEdit
+    public class ItemListCreate
     {
-        public Guid OwnerId { get; set; }
+        public int RouteId { get; set; }
         public int ItemId { get; set; }
         public string ItemName { get; set; }
-        public string Description { get; set; }
-        public ICollection<PokeRoute> ListOfRoutes { get; set; }
+        public ICollection<PokeItem> ListOfItems { get; set; }
     }
 }

@@ -41,13 +41,17 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ListOfRoutes)
+        </dt>
+
+        <dd>
+            @Html.DropDownList("RouteId", new SelectList(ViewBag.RouteList, "RouteName", ("RouteName")))
+        </dd>
     </dl>
-    @foreach (var i in ViewBag.ItemList)
-    {
-        <span>@i.ListOfRoutes</span>
-    }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

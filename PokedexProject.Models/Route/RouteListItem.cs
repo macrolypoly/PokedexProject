@@ -14,7 +14,7 @@ namespace PokedexProject.Models
         [Key]
         public int RouteId { get; set; }
         public ICollection<Pokemon> RoutePokemon { get; set; }
-        public ICollection<Item> ListOfItems { get; set; }
+        public ICollection<PokeItem> ListOfItems { get; set; }
         public string RouteName { get; set; }
     }
 }

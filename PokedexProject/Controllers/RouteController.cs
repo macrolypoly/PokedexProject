@@ -57,9 +57,7 @@ namespace PokedexProject.Controllers
                 };
             return View(model);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, RouteEdit model)
+        public ActionResult EditRoute(int id, RouteEdit model)
         {
             if (!ModelState.IsValid) return View(model);
             if (model.RouteId != id)
@@ -71,12 +69,19 @@ namespace PokedexProject.Controllers
 
             if (service.EditRoute(model))
             {
-                TempData["SaveResult"] = "Your Route was updated.";
+                TempData["SaveResult"] = "Your Item was updated.";
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Route could not be updated.");
+            ModelState.AddModelError("", "Item could not be updated.");
             return View(model);
         }
+        public ActionResult AddItem(int Id)
+        {
+            ViewBag.ID = Id;
+            ViewBag.ItemList = new ItemService(Guid.Parse(User.Identity.GetUserId())).GetItem();
+            return View();
+        }
+            
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
@@ -102,6 +107,7 @@ namespace PokedexProject.Controllers
         {
             var svc = CreateRouteService();
             var model = svc.GetRouteById(id);
+            ViewBag.ItemList = new ItemService(Guid.Parse(User.Identity.GetUserId())).GetItem();
 
             return View(model);
         }

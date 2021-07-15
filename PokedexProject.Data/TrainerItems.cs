@@ -17,6 +17,6 @@ namespace PokedexProject.Data
         public int TrainerId { get; set; }
         public int Count { get; set; }
         public virtual Trainer Trainer { get; set; }
-        public virtual Item Item { get; set; }
+        public virtual PokeItem Item { get; set; }
     }
 }

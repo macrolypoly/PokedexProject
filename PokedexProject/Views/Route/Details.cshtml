@@ -31,7 +31,12 @@
         <dd>
             @Html.DisplayFor(model => model.RoutePokemon)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.ListOfItems)
+        </dt>
+        <dd>
+            @Html.DropDownList("ItemId", new SelectList(ViewBag.ItemList, "ItemName", ("ItemName")))
+        </dd>
     </dl>
 </div>
 <p>

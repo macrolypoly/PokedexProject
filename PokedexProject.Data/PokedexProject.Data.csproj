@@ -55,7 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="Migrations\202107152218096_ooga.cs" />
+    <Compile Include="Migrations\202107152218096_ooga.Designer.cs">
+      <DependentUpon>202107152218096_ooga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PokeItem.cs" />
     <Compile Include="Migrations\202107090138294_ex.cs" />
     <Compile Include="Migrations\202107090138294_ex.Designer.cs">
       <DependentUpon>202107090138294_ex.cs</DependentUpon>
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107140042118_editmodel.resx">
       <DependentUpon>202107140042118_editmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107152218096_ooga.resx">
+      <DependentUpon>202107152218096_ooga.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

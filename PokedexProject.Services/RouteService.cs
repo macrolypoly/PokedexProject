@@ -1,5 +1,6 @@
 ﻿using PokedexProject.Data;
 using PokedexProject.Models;
+using PokedexProject.Models.Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +70,19 @@ namespace PokedexProject.Services
                        ListOfItems = entity.ListOfItems,
                        RoutePokemon = entity.RoutePokemon
                     };
+            }
+        }
+        public bool AddItem(ItemListCreate model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx.Routes.SingleOrDefault(e => e.RouteId == model.RouteId);
+                var item =
+                    ctx.Items.SingleOrDefault(r => r.ItemId == model.ItemId);
+                entity.ListOfItems.Add(item);
+
+                return ctx.SaveChanges() == 1;
             }
         }
         public bool EditRoute(RouteEdit model)

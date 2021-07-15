@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Item\ItemListCreate.cs" />
     <Compile Include="Route\RouteCreate.cs" />
     <Compile Include="Item\ItemCreate.cs" />
     <Compile Include="Route\RouteDetail.cs" />

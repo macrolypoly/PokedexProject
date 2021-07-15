@@ -125,6 +125,7 @@ namespace PokedexProject.Controllers
         {
             var svc = CreateItemService();
             var model = svc.GetItemById(id);
+            ViewBag.RouteList = new RouteService(Guid.Parse(User.Identity.GetUserId())).GetRoute();
 
             return View(model);
         }

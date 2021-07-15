@@ -1,4 +1,4 @@
-﻿@model PokedexProject.Models.ItemListItem
+﻿@model PokedexProject.Models.Item.ItemListCreate
 
 @{
     ViewBag.Title = "AddItem";
@@ -6,21 +6,24 @@
 
 <h2>AddItem</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ItemListItem</h4>
+        <h4>ItemListCreate</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ItemId)
+        @Html.HiddenFor(model2 => model2.RouteId)
+
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ListOfItems, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemId, "", new { @class = "text-danger" })
+                @Html.DropDownList("ItemId", new SelectList(ViewBag.ItemList, "ItemId", ("ItemName")));
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

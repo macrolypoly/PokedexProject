@@ -20,7 +20,7 @@ namespace PokedexProject.Services
         public bool CreateItem(ItemCreate model)
         {
             var entity =
-                new Item()
+                new PokeItem()
                 {
                    OwnerId = _userId,
                    ItemId = model.ItemId,

@@ -13,13 +13,13 @@ namespace PokedexProject.Data
         [Key]
         public int RouteId { get; set; }
         public ICollection<Pokemon> RoutePokemon { get; set; }
-        public ICollection<Item> ListOfItems { get; set; }
+        public ICollection<PokeItem> ListOfItems { get; set; }
         public string RouteName { get; set; }
 
         public PokeRoute()
         {
             RoutePokemon = new HashSet<Pokemon>();
-            ListOfItems = new HashSet<Item>();
+            ListOfItems = new HashSet<PokeItem>();
         }
     }
 }

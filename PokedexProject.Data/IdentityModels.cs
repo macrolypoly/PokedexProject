@@ -32,7 +32,7 @@ namespace PokedexProject.Data
             return new ApplicationDbContext();
         }
         public DbSet<Pokemon> Pokemon { get; set; }
-        public DbSet<Item> Items { get; set; }
+        public DbSet<PokeItem> Items { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<PokeRoute> Routes { get; set; }
         public DbSet<TrainerItems> TrainerItems { get; set; }
