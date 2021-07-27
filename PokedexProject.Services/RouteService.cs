@@ -1,6 +1,7 @@
 ﻿using PokedexProject.Data;
 using PokedexProject.Models;
 using PokedexProject.Models.Item;
+using PokedexProject.Models.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,6 @@ namespace PokedexProject.Services
                     OwnerId = _userId,
                     RouteId = model.RouteId,
                     RouteName = model.RouteName,
-                    ListOfItems = model.ListOfItems,
-                    RoutePokemon = model.RoutePokemon
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -57,9 +56,22 @@ namespace PokedexProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                //var innerJoinQuery =
+                // from route in ctx.Routes
+                // join item in ctx.Items on route.RouteId equals item.ListOfRoutes.Where(r => r.RouteId == id);
+                //var list = 
+                //    ctx
+                //    .Database.
+                //    .Select(i => i.ListOfRoutes.Where(x => x.RouteId == id));
+
+                //var route = ctx.Routes.Find(id);
+                //ctx.Items(route)
+                //    .Collection()
+
                 var entity =
                     ctx
                     .Routes
+                    //.Include(l => l.ListOfItems)
                     .Single(e => e.RouteId == id);
                 return
                     new RouteDetail
@@ -76,11 +88,50 @@ namespace PokedexProject.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var route =
                     ctx.Routes.SingleOrDefault(e => e.RouteId == model.RouteId);
                 var item =
-                    ctx.Items.SingleOrDefault(r => r.ItemId == model.ItemId);
-                entity.ListOfItems.Add(item);
+                    ctx.Items.Single(r => r.ItemId == model.ItemId);
+                route.ListOfItems.Add(item);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool AddPokemon(RoutePokemon model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var route =
+                    ctx.Routes.SingleOrDefault(e => e.RouteId == model.RouteId);
+                var pokemon =
+                    ctx.Pokemon.Single(r => r.PokemonId == model.PokemonId);
+                route.RoutePokemon.Add(pokemon);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteItem(RouteDeleteItem model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var route =
+                    ctx.Routes.SingleOrDefault(e => e.RouteId == model.RouteId);
+                var item =
+                    ctx.Items.Single(r => r.ItemId == model.ItemId);
+                route.ListOfItems.Remove(item);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeletePokemon(RouteDeletePoke model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var route =
+                    ctx.Routes.SingleOrDefault(e => e.RouteId == model.RouteId);
+                var poke =
+                    ctx.Pokemon.Single(r => r.PokemonId == model.PokemonId);
+                route.RoutePokemon.Remove(poke);
 
                 return ctx.SaveChanges() == 1;
             }

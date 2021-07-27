@@ -54,28 +54,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answers.cs" />
+    <Compile Include="Challenge.cs" />
+    <Compile Include="Choices.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202107152218096_ooga.cs" />
-    <Compile Include="Migrations\202107152218096_ooga.Designer.cs">
-      <DependentUpon>202107152218096_ooga.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PokeItem.cs" />
-    <Compile Include="Migrations\202107090138294_ex.cs" />
-    <Compile Include="Migrations\202107090138294_ex.Designer.cs">
-      <DependentUpon>202107090138294_ex.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107132312433_ex2.cs" />
-    <Compile Include="Migrations\202107132312433_ex2.Designer.cs">
-      <DependentUpon>202107132312433_ex2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107140042118_editmodel.cs" />
-    <Compile Include="Migrations\202107140042118_editmodel.Designer.cs">
-      <DependentUpon>202107140042118_editmodel.cs</DependentUpon>
+    <Compile Include="Migrations\202107222310523_ex.cs" />
+    <Compile Include="Migrations\202107222310523_ex.Designer.cs">
+      <DependentUpon>202107222310523_ex.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PokeItem.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PokeRoute.cs" />
+    <Compile Include="Question.cs" />
     <Compile Include="Trainer.cs" />
     <Compile Include="TrainerItems.cs" />
     <Compile Include="TrainerPokemon.cs" />
@@ -85,17 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202107090138294_ex.resx">
-      <DependentUpon>202107090138294_ex.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107132312433_ex2.resx">
-      <DependentUpon>202107132312433_ex2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107140042118_editmodel.resx">
-      <DependentUpon>202107140042118_editmodel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107152218096_ooga.resx">
-      <DependentUpon>202107152218096_ooga.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107222310523_ex.resx">
+      <DependentUpon>202107222310523_ex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

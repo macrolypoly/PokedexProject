@@ -1,5 +1,6 @@
 ﻿using PokedexProject.Data;
 using PokedexProject.Models;
+using PokedexProject.Models.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,9 @@ namespace PokedexProject.Services
                         {
                             PokemonId = e.PokemonId,
                             PokemonName = e.PokemonName,
-                            Type = (int)e.Type,
-                            Type2 = (int)e.Type2
+                            Type = (PokedexProject.Models.PokeType)e.Type,
+                            Type2 = (PokedexProject.Models.PokeType)e.Type2,
+                            RoutesFound = e.RoutesFound
                         }
                         );
                 return query.ToArray();
@@ -66,9 +68,23 @@ namespace PokedexProject.Services
                     {
                         PokemonId = entity.PokemonId,
                         PokemonName = entity.PokemonName,
-                        Type = (int)entity.Type,
-                        Type2 = (int)entity.Type2
+                        Type = (Models.PokeType)entity.Type,
+                        Type2 = (Models.PokeType)entity.Type2,
+                        RoutesFound = entity.RoutesFound
                     };
+            }
+        }
+        public bool AddRoute(RoutePokemon model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var poke =
+                    ctx.Pokemon.SingleOrDefault(e => e.PokemonId == model.PokemonId);
+                var route =
+                    ctx.Routes.SingleOrDefault(r => r.RouteId == model.RouteId);
+                poke.RoutesFound.Add(route);
+
+                return ctx.SaveChanges() == 1;
             }
         }
         public bool EditPokemon(PokemonEdit model)

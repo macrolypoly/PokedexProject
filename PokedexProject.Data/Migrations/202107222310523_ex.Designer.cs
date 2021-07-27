@@ -7,13 +7,13 @@ namespace PokedexProject.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class editmodel : IMigrationMetadata
+    public sealed partial class ex : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(editmodel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ex));
         
         string IMigrationMetadata.Id
         {
-            get { return "202107140042118_editmodel"; }
+            get { return "202107222310523_ex"; }
         }
         
         string IMigrationMetadata.Source

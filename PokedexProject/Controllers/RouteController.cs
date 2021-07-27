@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using PokedexProject.Models;
+using PokedexProject.Models.Item;
+using PokedexProject.Models.Route;
 using PokedexProject.Services;
 using System;
 using System.Collections.Generic;
@@ -77,11 +79,110 @@ namespace PokedexProject.Controllers
         }
         public ActionResult AddItem(int Id)
         {
-            ViewBag.ID = Id;
+            var service = CreateRouteService();
+            var route = service.GetRouteById(Id);
+            var model =
+                new ItemListCreate
+                {
+                    RouteId = Id
+                    
+                };
             ViewBag.ItemList = new ItemService(Guid.Parse(User.Identity.GetUserId())).GetItem();
-            return View();
+            return View(model);
         }
-            
+        [ActionName("DeleteItem")]
+        public ActionResult DeleteItem(int Id)
+        {
+            var service = CreateRouteService();
+            var route = service.GetRouteById(Id);
+            var model =
+                new RouteDeleteItem
+                {
+                    RouteId = route.RouteId,
+                    ListOfItems = route.ListOfItems
+                };
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("DeleteItem")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteItem(RouteDeleteItem model)
+        {
+            var service = CreateRouteService();
+            service.DeleteItem(model);
+
+            TempData["SaveResult"] = "Your item was removed.";
+            return RedirectToAction("Index");
+        }
+        [ActionName("DeletePokemon")]
+        public ActionResult DeletePokemon(int Id)
+        {
+            var service = CreateRouteService();
+            var route = service.GetRouteById(Id);
+            var model =
+                new RouteDeletePoke
+                {
+                    RouteId = route.RouteId,
+                    RoutePokemon = route.RoutePokemon
+                };
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("DeletePokemon")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePokemon(RouteDeletePoke model)
+        {
+            var service = CreateRouteService();
+            service.DeletePokemon(model);
+
+            TempData["SaveResult"] = "Your pokemon was removed.";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddItem(ItemListCreate model)
+        {
+            var service = CreateRouteService();
+
+            if(service.AddItem(model))
+            {
+                TempData["SaveResult"] = "Item was added.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Item could not be added.");
+            ViewBag.ItemList = new ItemService(Guid.Parse(User.Identity.GetUserId())).GetItem();
+            return View(model);
+        }
+        public ActionResult AddPokemon(int Id)
+        {
+            var service = CreateRouteService();
+            var route = service.GetRouteById(Id);
+            var model =
+                new RoutePokemon
+                {
+                    RouteId = Id
+
+                };
+            ViewBag.PokemonList = new PokemonService(Guid.Parse(User.Identity.GetUserId())).GetPokemon();
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPokemon(RoutePokemon model)
+        {
+            var service = CreateRouteService();
+
+            if (service.AddPokemon(model))
+            {
+                TempData["SaveResult"] = "Item was added.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Item could not be added.");
+            ViewBag.PokemonList = new PokemonService(Guid.Parse(User.Identity.GetUserId())).GetPokemon();
+            return View(model);
+        }
+
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {

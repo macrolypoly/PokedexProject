@@ -1,0 +1,51 @@
+﻿@model PokedexProject.Models.Challenge.ChallengeDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChallengeDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChallengeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChallengeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChallengeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChallengeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ListOfQuestions)
+        </dt>
+        @foreach (var item in (Model.ListOfQuestions))
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ChallengeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

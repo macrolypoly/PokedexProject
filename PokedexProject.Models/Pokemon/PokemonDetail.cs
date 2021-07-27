@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokedexProject.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace PokedexProject.Models
         [Key]
         public int PokemonId { get; set; }
         public string PokemonName { get; set; }
-        public int Type { get; set; }
-        public int Type2 { get; set; }
+        public PokeType Type { get; set; }
+        public PokeType Type2 { get; set; }
+        public ICollection<PokeRoute> RoutesFound { get; set; }
     }
 }

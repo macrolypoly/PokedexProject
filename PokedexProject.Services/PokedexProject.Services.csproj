@@ -54,9 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChallengeService.cs" />
     <Compile Include="ItemService.cs" />
     <Compile Include="PokemonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionService.cs" />
     <Compile Include="RouteService.cs" />
     <Compile Include="TrainerItemsService.cs" />
     <Compile Include="TrainerService.cs" />

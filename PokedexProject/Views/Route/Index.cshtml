@@ -33,7 +33,7 @@
             @Html.ActionLink("Details", "Details", new { id=item.RouteId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.RouteId })
             @Html.ActionLink("Add Pokemon To Route", "AddPokemon", new { id=item.RouteId}) |
-            @Html.ActionLink("Add Item to Route", "AddItem", new { id = item.RouteId })
+            @Html.ActionLink("Add Item to Route", "AddItem", new { Id = item.RouteId }, null)
         </td>
     </tr>
 }

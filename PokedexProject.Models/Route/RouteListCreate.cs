@@ -14,6 +14,5 @@ namespace PokedexProject.Models.Route
 
         public string RouteName { get; set; }
 
-        public List<PokeRoute> ListOfRoutes { get; set; }
     }
 }

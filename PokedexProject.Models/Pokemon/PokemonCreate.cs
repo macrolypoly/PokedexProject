@@ -37,9 +37,9 @@ namespace PokedexProject.Models
         [Required]
         public string PokemonName { get; set; }
         [Required]
-        public int Type { get; set; }
+        public PokeType Type { get; set; }
         [Required]
-        public int Type2 { get; set; }
+        public PokeType Type2 { get; set; }
 
     }
 }

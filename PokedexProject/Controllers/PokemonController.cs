@@ -53,7 +53,7 @@ namespace PokedexProject.Controllers
                     PokemonId = detail.PokemonId,
                     PokemonName = detail.PokemonName,
                     Type = detail.Type,
-                    Type2 = detail.Type2
+                    Type2 = detail.Type2,
                 };
             return View(model);
         }

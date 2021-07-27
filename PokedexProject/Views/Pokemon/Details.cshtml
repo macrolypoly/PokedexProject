@@ -33,7 +33,15 @@
         <dd>
             @Html.DisplayFor(model => model.Type2)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.RoutesFound)
+        </dt>
+        @foreach (var poke in (Model.RoutesFound))
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => poke.RouteName)
+            </dd>
+        }
     </dl>
 </div>
 <p>

@@ -12,8 +12,8 @@ namespace PokedexProject.Data
         public Guid OwnerId { get; set; }
         [Key]
         public int RouteId { get; set; }
-        public ICollection<Pokemon> RoutePokemon { get; set; }
-        public ICollection<PokeItem> ListOfItems { get; set; }
+        public virtual ICollection<Pokemon> RoutePokemon { get; set; }
+        public virtual ICollection<PokeItem> ListOfItems { get; set; }
         public string RouteName { get; set; }
 
         public PokeRoute()

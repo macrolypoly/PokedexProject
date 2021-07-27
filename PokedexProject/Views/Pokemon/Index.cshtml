@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<PokedexProject.Models.PokemonListItem>
+@using PokedexProject.Data
 
 @{
     ViewBag.Title = "Index";
@@ -35,10 +36,10 @@
             @Html.DisplayFor(modelItem => item.PokemonName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @item.Type.GetDisplayName()
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type2)
+           @item.Type2.GetDisplayName()
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.PokemonId }) |

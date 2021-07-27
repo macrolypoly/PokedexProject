@@ -1,0 +1,48 @@
+﻿@model PokedexProject.Models.Challenge.ChallengeDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ChallengeDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChallengeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChallengeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChallengeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChallengeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -75,11 +75,33 @@ namespace PokedexProject.Controllers
             ModelState.AddModelError("", "Item could not be updated.");
             return View(model);
         }
-        public ActionResult AddRouteToItem(int Id)
+        public ActionResult AddRoute(int Id)
         {
-            ViewBag.ID = Id;
+            var service = CreateItemService();
+            var item = service.GetItemById(Id);
+            var model =
+                new RouteListCreate
+                {
+                    ItemId = Id
+                    
+                    
+                };
             ViewBag.RouteList = new RouteService(Guid.Parse(User.Identity.GetUserId())).GetRoute();
-            return View();
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddRoute(RouteListCreate model)
+        {
+            var service = CreateItemService();
+
+            if (service.AddRoute(model))
+            {
+                TempData["SaveResult"] = "Route was added.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Route could not be added.");
+            return View(model);
         }
         public ActionResult EditRoutes(int id, RouteListCreate model)
         {
@@ -121,6 +143,7 @@ namespace PokedexProject.Controllers
             TempData["SaveResult"] = "Item was deleted.";
             return RedirectToAction("Index");
         }
+        
         public ActionResult Details(int id)
         {
             var svc = CreateItemService();

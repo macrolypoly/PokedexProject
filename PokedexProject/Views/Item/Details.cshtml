@@ -45,10 +45,12 @@
         <dt>
             @Html.DisplayNameFor(model => model.ListOfRoutes)
         </dt>
-
-        <dd>
-            @Html.DropDownList("RouteId", new SelectList(ViewBag.RouteList, "RouteName", ("RouteName")))
-        </dd>
+        @foreach (var item in (Model.ListOfRoutes))
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.RouteName)
+            </dd>
+        }
     </dl>
 </div>
 <p>

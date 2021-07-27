@@ -26,20 +26,27 @@
             @Html.DisplayFor(model => model.RouteName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.RoutePokemon)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RoutePokemon)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.ListOfItems)
         </dt>
-        <dd>
-            @Html.DropDownList("ItemId", new SelectList(ViewBag.ItemList, "ItemName", ("ItemName")))
-        </dd>
+        @foreach (var item in (Model.ListOfItems))
+        {
+          <dd>
+              @Html.DisplayFor(modelItem => item.ItemName)
+          </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.RoutePokemon)
+        </dt>
+        @foreach (var poke in (Model.RoutePokemon))
+            {
+                <dd>
+                    @Html.DisplayFor(modelItem => poke.PokemonName)
+                </dd>
+            }
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RouteId }) |
+    @Html.ActionLink("Remove Item", "DeleteItem", new { id = Model.RouteId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -54,9 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Challenge\ChallengeCreate.cs" />
+    <Compile Include="Challenge\ChallengeDetail.cs" />
+    <Compile Include="Challenge\ChallengeEdit.cs" />
+    <Compile Include="Challenge\ChallengeListItem.cs" />
+    <Compile Include="Challenge\ChallengeQuestion.cs" />
+    <Compile Include="Challenge\DeleteQuestion.cs" />
     <Compile Include="Item\ItemListCreate.cs" />
+    <Compile Include="Question\DeleteChoices.cs" />
+    <Compile Include="Question\QuestionChoices.cs" />
+    <Compile Include="Question\QuestionCreate.cs" />
+    <Compile Include="Question\QuestionDetail.cs" />
+    <Compile Include="Question\QuestionEdit.cs" />
+    <Compile Include="Question\QuestionListItem.cs" />
     <Compile Include="Route\RouteCreate.cs" />
     <Compile Include="Item\ItemCreate.cs" />
+    <Compile Include="Route\RouteDeleteItem.cs" />
+    <Compile Include="Route\RouteDeletePoke.cs" />
     <Compile Include="Route\RouteDetail.cs" />
     <Compile Include="Item\ItemDetail.cs" />
     <Compile Include="Route\RouteEdit.cs" />
@@ -69,6 +83,7 @@
     <Compile Include="Pokemon\PokemonEdit.cs" />
     <Compile Include="Pokemon\PokemonListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Route\RoutePokemon.cs" />
     <Compile Include="TrainerItems\TrainerItemsDetail.cs" />
     <Compile Include="TrainerItems\TrainerItemsEdit.cs" />
     <Compile Include="TrainerItems\TrainerItemsListItem.cs" />

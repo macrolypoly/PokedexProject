@@ -168,10 +168,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChallengeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PokemonController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\TrainerItemsController.cs" />
@@ -264,9 +266,26 @@
     <Content Include="Views\TrainerItems\Edit.cshtml" />
     <Content Include="Views\TrainerItems\Delete.cshtml" />
     <Content Include="Views\TrainerItems\Details.cshtml" />
-    <Content Include="Views\Route\AddItem.cshtml" />
     <Content Include="Views\Item\EditRoute.cshtml" />
-    <Content Include="Views\Item\AddRouteToItem.cshtml" />
+    <Content Include="Views\Item\AddRoute.cshtml" />
+    <Content Include="Views\Route\AddItem.cshtml" />
+    <Content Include="Views\Challenge\Index.cshtml" />
+    <Content Include="Views\Challenge\Create.cshtml" />
+    <Content Include="Views\Challenge\Edit.cshtml" />
+    <Content Include="Views\Challenge\AddQuestion.cshtml" />
+    <Content Include="Views\Challenge\Delete.cshtml" />
+    <Content Include="Views\Challenge\Details.cshtml" />
+    <Content Include="Views\Route\DeleteItem.cshtml" />
+    <Content Include="Views\Route\AddPokemon.cshtml" />
+    <Content Include="Views\Route\DeletePokemon.cshtml" />
+    <Content Include="Views\Challenge\DeleteQuestion.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\EditChallenge.cshtml" />
+    <Content Include="Views\Question\AddChoices.cshtml" />
+    <Content Include="Views\Question\DeleteChoices.cshtml" />
+    <Content Include="Views\Question\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

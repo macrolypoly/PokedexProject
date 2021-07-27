@@ -47,7 +47,8 @@ namespace PokedexProject.Services
                             OwnerId = e.OwnerId,
                             ItemId = e.ItemId,
                             ItemName = e.ItemName,
-                            Description = e.Description
+                            Description = e.Description,
+                            ListOfRoutes = e.ListOfRoutes
                         }
                         );
                 return query.ToArray();
@@ -67,7 +68,8 @@ namespace PokedexProject.Services
                         OwnerId = entity.OwnerId,
                         ItemId = entity.ItemId,
                         ItemName = entity.ItemName,
-                        Description = entity.Description
+                        Description = entity.Description,
+                        ListOfRoutes = entity.ListOfRoutes
                     };
             }
         }
@@ -91,11 +93,11 @@ namespace PokedexProject.Services
         {
             using(var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var item =
                     ctx.Items.SingleOrDefault(e => e.ItemId == model.ItemId);
                 var route =
                     ctx.Routes.SingleOrDefault(r => r.RouteId == model.RouteId);
-                entity.ListOfRoutes.Add(route);
+                item.ListOfRoutes.Add(route);
 
                 return ctx.SaveChanges() == 1;
             }

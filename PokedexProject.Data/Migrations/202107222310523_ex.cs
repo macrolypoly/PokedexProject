@@ -8,21 +8,77 @@ namespace PokedexProject.Data.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Item",
+                "dbo.Answers",
+                c => new
+                    {
+                        AnswerId = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        AnswerText = c.String(),
+                        QuestionId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.AnswerId)
+                .ForeignKey("dbo.Question", t => t.QuestionId, cascadeDelete: true)
+                .Index(t => t.QuestionId);
+            
+            CreateTable(
+                "dbo.Question",
+                c => new
+                    {
+                        QuestionId = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        QuestionText = c.String(),
+                        ChallengeId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.QuestionId)
+                .ForeignKey("dbo.Challenge", t => t.ChallengeId, cascadeDelete: true)
+                .Index(t => t.ChallengeId);
+            
+            CreateTable(
+                "dbo.Challenge",
+                c => new
+                    {
+                        ChallengeId = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        ChallengeName = c.String(),
+                    })
+                .PrimaryKey(t => t.ChallengeId);
+            
+            CreateTable(
+                "dbo.Choices",
+                c => new
+                    {
+                        ChoiceId = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        ChoiceText = c.String(),
+                        QuestionId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ChoiceId)
+                .ForeignKey("dbo.Question", t => t.QuestionId, cascadeDelete: true)
+                .Index(t => t.QuestionId);
+            
+            CreateTable(
+                "dbo.PokeItem",
                 c => new
                     {
                         ItemId = c.Int(nullable: false, identity: true),
                         OwnerId = c.Guid(nullable: false),
                         ItemName = c.String(),
                         Description = c.String(),
-                        Route_RouteId = c.Int(),
                         Trainer_TrainerId = c.Int(),
                     })
                 .PrimaryKey(t => t.ItemId)
-                .ForeignKey("dbo.Route", t => t.Route_RouteId)
                 .ForeignKey("dbo.Trainer", t => t.Trainer_TrainerId)
-                .Index(t => t.Route_RouteId)
                 .Index(t => t.Trainer_TrainerId);
+            
+            CreateTable(
+                "dbo.PokeRoute",
+                c => new
+                    {
+                        RouteId = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        RouteName = c.String(),
+                    })
+                .PrimaryKey(t => t.RouteId);
             
             CreateTable(
                 "dbo.Pokemon",
@@ -33,13 +89,10 @@ namespace PokedexProject.Data.Migrations
                         PokemonName = c.String(nullable: false),
                         Type = c.Int(nullable: false),
                         Type2 = c.Int(nullable: false),
-                        Route_RouteId = c.Int(),
                         Trainer_TrainerId = c.Int(),
                     })
                 .PrimaryKey(t => t.PokemonId)
-                .ForeignKey("dbo.Route", t => t.Route_RouteId)
                 .ForeignKey("dbo.Trainer", t => t.Trainer_TrainerId)
-                .Index(t => t.Route_RouteId)
                 .Index(t => t.Trainer_TrainerId);
             
             CreateTable(
@@ -67,16 +120,6 @@ namespace PokedexProject.Data.Migrations
                 .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
-                "dbo.Route",
-                c => new
-                    {
-                        RouteId = c.Int(nullable: false, identity: true),
-                        OwnerId = c.Guid(nullable: false),
-                        RouteName = c.String(),
-                    })
-                .PrimaryKey(t => t.RouteId);
-            
-            CreateTable(
                 "dbo.TrainerItems",
                 c => new
                     {
@@ -86,7 +129,7 @@ namespace PokedexProject.Data.Migrations
                         Count = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ItemId)
-                .ForeignKey("dbo.Item", t => t.ItemId)
+                .ForeignKey("dbo.PokeItem", t => t.ItemId)
                 .ForeignKey("dbo.Trainer", t => t.TrainerId, cascadeDelete: true)
                 .Index(t => t.ItemId)
                 .Index(t => t.TrainerId);
@@ -163,6 +206,32 @@ namespace PokedexProject.Data.Migrations
                 .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
                 .Index(t => t.ApplicationUser_Id);
             
+            CreateTable(
+                "dbo.PokeRoutePokeItem",
+                c => new
+                    {
+                        PokeRoute_RouteId = c.Int(nullable: false),
+                        PokeItem_ItemId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.PokeRoute_RouteId, t.PokeItem_ItemId })
+                .ForeignKey("dbo.PokeRoute", t => t.PokeRoute_RouteId, cascadeDelete: true)
+                .ForeignKey("dbo.PokeItem", t => t.PokeItem_ItemId, cascadeDelete: true)
+                .Index(t => t.PokeRoute_RouteId)
+                .Index(t => t.PokeItem_ItemId);
+            
+            CreateTable(
+                "dbo.PokemonPokeRoute",
+                c => new
+                    {
+                        Pokemon_PokemonId = c.Int(nullable: false),
+                        PokeRoute_RouteId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Pokemon_PokemonId, t.PokeRoute_RouteId })
+                .ForeignKey("dbo.Pokemon", t => t.Pokemon_PokemonId, cascadeDelete: true)
+                .ForeignKey("dbo.PokeRoute", t => t.PokeRoute_RouteId, cascadeDelete: true)
+                .Index(t => t.Pokemon_PokemonId)
+                .Index(t => t.PokeRoute_RouteId);
+            
         }
         
         public override void Down()
@@ -174,11 +243,20 @@ namespace PokedexProject.Data.Migrations
             DropForeignKey("dbo.TrainerPokemon", "PokemonId", "dbo.Pokemon");
             DropForeignKey("dbo.TrainerItems", "TrainerId", "dbo.Trainer");
             DropForeignKey("dbo.Pokemon", "Trainer_TrainerId", "dbo.Trainer");
-            DropForeignKey("dbo.Item", "Trainer_TrainerId", "dbo.Trainer");
-            DropForeignKey("dbo.TrainerItems", "ItemId", "dbo.Item");
-            DropForeignKey("dbo.Pokemon", "Route_RouteId", "dbo.Route");
-            DropForeignKey("dbo.Item", "Route_RouteId", "dbo.Route");
+            DropForeignKey("dbo.PokeItem", "Trainer_TrainerId", "dbo.Trainer");
+            DropForeignKey("dbo.TrainerItems", "ItemId", "dbo.PokeItem");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
+            DropForeignKey("dbo.PokemonPokeRoute", "PokeRoute_RouteId", "dbo.PokeRoute");
+            DropForeignKey("dbo.PokemonPokeRoute", "Pokemon_PokemonId", "dbo.Pokemon");
+            DropForeignKey("dbo.PokeRoutePokeItem", "PokeItem_ItemId", "dbo.PokeItem");
+            DropForeignKey("dbo.PokeRoutePokeItem", "PokeRoute_RouteId", "dbo.PokeRoute");
+            DropForeignKey("dbo.Choices", "QuestionId", "dbo.Question");
+            DropForeignKey("dbo.Answers", "QuestionId", "dbo.Question");
+            DropForeignKey("dbo.Question", "ChallengeId", "dbo.Challenge");
+            DropIndex("dbo.PokemonPokeRoute", new[] { "PokeRoute_RouteId" });
+            DropIndex("dbo.PokemonPokeRoute", new[] { "Pokemon_PokemonId" });
+            DropIndex("dbo.PokeRoutePokeItem", new[] { "PokeItem_ItemId" });
+            DropIndex("dbo.PokeRoutePokeItem", new[] { "PokeRoute_RouteId" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.TrainerPokemon", new[] { "TrainerId" });
@@ -188,20 +266,27 @@ namespace PokedexProject.Data.Migrations
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.Pokemon", new[] { "Trainer_TrainerId" });
-            DropIndex("dbo.Pokemon", new[] { "Route_RouteId" });
-            DropIndex("dbo.Item", new[] { "Trainer_TrainerId" });
-            DropIndex("dbo.Item", new[] { "Route_RouteId" });
+            DropIndex("dbo.PokeItem", new[] { "Trainer_TrainerId" });
+            DropIndex("dbo.Choices", new[] { "QuestionId" });
+            DropIndex("dbo.Question", new[] { "ChallengeId" });
+            DropIndex("dbo.Answers", new[] { "QuestionId" });
+            DropTable("dbo.PokemonPokeRoute");
+            DropTable("dbo.PokeRoutePokeItem");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
             DropTable("dbo.TrainerPokemon");
             DropTable("dbo.Trainer");
             DropTable("dbo.TrainerItems");
-            DropTable("dbo.Route");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Pokemon");
-            DropTable("dbo.Item");
+            DropTable("dbo.PokeRoute");
+            DropTable("dbo.PokeItem");
+            DropTable("dbo.Choices");
+            DropTable("dbo.Challenge");
+            DropTable("dbo.Question");
+            DropTable("dbo.Answers");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model PokedexProject.Models.Route.RouteListCreate
 
 @{
-    ViewBag.Title = "AddRouteToItem";
+    ViewBag.Title = "AddRoute";
 }
 
 <h2>AddRouteToItem</h2>
@@ -17,14 +17,12 @@
     <div class="form-group">
         @Html.HiddenFor(model => model.ItemId, htmlAttributes: new { @class = "control-label col-md-2" })
     </div>
+ 
     <div class="form-group">
-        @Html.HiddenFor(model => model.RouteId, htmlAttributes: new { @class = "control-label col-md-2" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ListOfRoutes, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.RouteId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("RouteId", new SelectList(ViewBag.RouteList, "RouteId", ("RouteName")));
+            @Html.DropDownList("RouteId", new SelectList(ViewBag.RouteList, "RouteId", "RouteName"));
+            @Html.ValidationMessageFor(model => model.RouteName, "", new { @class = "text-danger"})
         </div>
     </div>
 
