@@ -86,19 +86,19 @@ namespace PokedexProject.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool AddQuestion(ChallengeQuestion model)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var Challenge =
-                    ctx.Challenges.SingleOrDefault(e => e.ChallengeId == model.ChallengeId);
-                var question =
-                    ctx.Questions.SingleOrDefault(r => r.QuestionId == model.QuestionId);
-                Challenge.ListOfQuestions.Add(question);
+        //public bool AddQuestion(ChallengeQuestion model)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var Challenge =
+        //            ctx.Challenges.SingleOrDefault(e => e.ChallengeId == model.ChallengeId);
+        //        var question =
+        //            ctx.Questions.SingleOrDefault(r => r.QuestionId == model.QuestionId);
+        //        Challenge.ListOfQuestions.Add(question);
 
-                return ctx.SaveChanges() == 1;
-            }
-        }
+        //        return ctx.SaveChanges() == 1;
+        //    }
+        //}
         public bool DeleteQuestion(DeleteQuestion model)
         {
             using (var ctx = new ApplicationDbContext())

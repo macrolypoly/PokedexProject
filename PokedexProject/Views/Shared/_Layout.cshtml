@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("MyScripts", required: false)
 
 </head>
 <body>
@@ -26,12 +27,13 @@
                     {
                         <li>@Html.ActionLink("Pokemon", "Index", "Pokemon")</li>
                         <li>@Html.ActionLink("Routes", "Index", "Route")</li>
-                        <li>@Html.ActionLink("Create Items", "Index", "Item")</li>
+                        <li>@Html.ActionLink("Items", "Index", "Item")</li>
                         <li>@Html.ActionLink("Your Pokemon", "Index", "TrainerPokemon")</li>
                         <li>@Html.ActionLink("Create Trainer", "Index", "Trainer")</li>
-                        <li>@Html.ActionLink("Go To Route", "Index", "Challenge")</li>
-                        <li>@Html.ActionLink("Manage Challenges", "Index", "Challenge")</li>
-                        <li>@Html.ActionLink("Manage Questions", "Index", "Question")</li>
+                        <li>@Html.ActionLink("Challenges", "Index", "Challenge")</li>
+                        <li>@Html.ActionLink("Questions", "Index", "Question")</li>
+                        <li>@Html.ActionLink("Choice", "Index", "Choice")</li>
+                        <li>@Html.ActionLink("Answer", "Index", "Answer") </li>
                     }
 
                 </ul>
@@ -41,6 +43,13 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <hr />
+        <ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Go To Route", "SelectChallenge", "Game")</li>
+            }
+        </ul>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

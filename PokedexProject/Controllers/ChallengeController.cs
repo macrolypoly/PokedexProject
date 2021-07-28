@@ -76,34 +76,34 @@ namespace PokedexProject.Controllers
             ModelState.AddModelError("", "Challenge could not be updated.");
             return View(model);
         }
-        public ActionResult AddQuestion(int Id)
-        {
-            var service = CreateChallengeService();
-            var Challenge = service.GetChallengeById(Id);
-            var model =
-                new ChallengeQuestion
-                {
-               ChallengeId = Id,
+        //public ActionResult AddQuestion(int Id)
+        //{
+        //    var service = CreateChallengeService();
+        //    var Challenge = service.GetChallengeById(Id);
+        //    var model =
+        //        new ChallengeQuestion
+        //        {
+        //       ChallengeId = Id,
 
 
-                };
-            ViewBag.QuestionList = new QuestionService(Guid.Parse(User.Identity.GetUserId())).GetQuestion();
-            return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddQuestion(ChallengeQuestion model)
-        {
-            var service = CreateChallengeService();
+        //        };
+        //    ViewBag.QuestionList = new QuestionService(Guid.Parse(User.Identity.GetUserId())).GetQuestion();
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddQuestion(ChallengeQuestion model)
+        //{
+        //    var service = CreateChallengeService();
 
-            if (service.AddQuestion(model))
-            {
-                TempData["SaveResult"] = "Route was added.";
-                return RedirectToAction("Index");
-            }
-            ModelState.AddModelError("", "Route could not be added.");
-            return View(model);
-        }
+        //    if (service.AddQuestion(model))
+        //    {
+        //        TempData["SaveResult"] = "Question was added.";
+        //        return RedirectToAction("Index");
+        //    }
+        //    ModelState.AddModelError("", "Question could not be added.");
+        //    return View(model);
+        //}
         [ActionName("DeleteQuestion")]
         public ActionResult DeleteQuestion(int Id)
         {

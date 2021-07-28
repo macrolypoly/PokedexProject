@@ -17,10 +17,10 @@ namespace PokedexProject.Data
         [ForeignKey("Challenge")]
         public int ChallengeId { get; set; }
         public virtual Challenge Challenge { get; set; }
-        public virtual ICollection<Choices> Choices { get; set; }
+        public virtual ICollection<Choice> Choices { get; set; }
         public Question()
         {
-            Choices = new HashSet<Choices>();
+            Choices = new HashSet<Choice>();
         }
     }
 }

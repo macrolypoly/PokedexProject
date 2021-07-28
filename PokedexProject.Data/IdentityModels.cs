@@ -36,8 +36,8 @@ namespace PokedexProject.Data
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<PokeRoute> Routes { get; set; }
         public DbSet<Challenge> Challenges { get; set; }
-        public DbSet<Answers> Answers { get; set; }
-        public DbSet<Choices> Choices { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Choice> Choices { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<TrainerItems> TrainerItems { get; set; }
         public DbSet<TrainerPokemon> TrainerPokemon { get; set; }

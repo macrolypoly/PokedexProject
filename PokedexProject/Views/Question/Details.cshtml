@@ -17,6 +17,13 @@
         <dd>
             @Html.DisplayFor(model => model.OwnerId)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.QuestionText)
@@ -37,11 +44,11 @@
             @Html.DisplayNameFor(model => model.Choices)
         </dt>
         @foreach (var item in (Model.Choices))
-            {
-                <dd>
-                    @Html.DisplayFor(modelItem => item.ChoiceText)
-                </dd>
-            }
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => item.ChoiceText)
+            </dd>
+        }
     </dl>
 </div>
 <p>

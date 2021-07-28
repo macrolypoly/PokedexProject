@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChallengeService.cs" />
+    <Compile Include="AnswerService.cs" />
+    <Compile Include="ChoiceService.cs" />
     <Compile Include="ItemService.cs" />
     <Compile Include="PokemonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

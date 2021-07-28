@@ -184,7 +184,7 @@ namespace PokedexProject.Controllers
         {
             var svc = CreateQuestionService();
             var model = svc.GetQuestionById(id);
-            //ViewBag.ChoicesList = new ChoicesService(Guid.Parse(User.Identity.GetUserId())).GetChoices();
+            ViewBag.ChoiceList = new ChoiceService(Guid.Parse(User.Identity.GetUserId())).GetChoice();
 
             return View(model);
         }

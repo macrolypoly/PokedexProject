@@ -54,13 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Answers.cs" />
+    <Compile Include="Answer.cs" />
     <Compile Include="Challenge.cs" />
-    <Compile Include="Choices.cs" />
+    <Compile Include="Choice.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\202107222310523_ex.cs" />
     <Compile Include="Migrations\202107222310523_ex.Designer.cs">
       <DependentUpon>202107222310523_ex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107272219171_ex2.cs" />
+    <Compile Include="Migrations\202107272219171_ex2.Designer.cs">
+      <DependentUpon>202107272219171_ex2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PokeItem.cs" />
@@ -79,6 +83,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202107222310523_ex.resx">
       <DependentUpon>202107222310523_ex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107272219171_ex2.resx">
+      <DependentUpon>202107272219171_ex2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

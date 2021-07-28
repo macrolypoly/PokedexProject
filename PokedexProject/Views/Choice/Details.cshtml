@@ -1,0 +1,51 @@
+﻿@model PokedexProject.Models.Choice.ChoiceDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChoiceDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChoiceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChoiceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChoiceText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChoiceText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ChoiceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -27,7 +27,7 @@ namespace PokedexProject.Models.Question
         {
             get; set;
         }
-        public virtual ICollection<Choices> Choices
+        public virtual ICollection<PokedexProject.Data.Choice> Choices
         {
             get; set;
         }

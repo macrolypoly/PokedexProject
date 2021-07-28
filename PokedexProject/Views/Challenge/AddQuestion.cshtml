@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.QuestionId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("QuestionId", new SelectList(ViewBag.QuestionList, "QuestionId", "QuestionText"));
-                @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.QuestionId, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -32,5 +32,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    
 </div>

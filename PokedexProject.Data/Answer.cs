@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PokedexProject.Data
 {
-   public class Answers
+   public class Answer
     {
         public Guid OwnerId { get; set; }
         [Key]
