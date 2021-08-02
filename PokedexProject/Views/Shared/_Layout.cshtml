@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("MyScripts", required: false)
 
 </head>
 <body>
@@ -44,12 +43,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <ul>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <li>@Html.ActionLink("Go To Route", "SelectChallenge", "Game")</li>
-            }
-        </ul>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

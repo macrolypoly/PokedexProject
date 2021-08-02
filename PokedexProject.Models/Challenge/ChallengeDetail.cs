@@ -21,6 +21,7 @@ namespace PokedexProject.Models.Challenge
         {
             get; set;
         }
-        public ICollection<PokedexProject.Data.Question> ListOfQuestions { get; set; }
+        public int RouteId { get; set; }
+        public List<PokedexProject.Data.Question> ListOfQuestions { get; set; }
     }
 }

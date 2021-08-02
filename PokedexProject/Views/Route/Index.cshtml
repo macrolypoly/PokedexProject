@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<PokedexProject.Models.RouteListItem>
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Index";
@@ -20,22 +21,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RouteId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RouteName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RouteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RouteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RouteId })
-            @Html.ActionLink("Add Pokemon To Route", "AddPokemon", new { id=item.RouteId}) |
-            @Html.ActionLink("Add Item to Route", "AddItem", new { Id = item.RouteId }, null)
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteName)
+            </td>
+    
+            <td>
+                @if (item.OwnerId.ToString() == User.Identity.GetUserId())
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RouteId });
+                    @Html.ActionLink("Details", "Details", new { id = item.RouteId });
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RouteId }) ;
+                    @Html.ActionLink("Add Pokemon To Route", "AddPokemon", new { id = item.RouteId });
+                    @Html.ActionLink("Add Item to Route", "AddItem", new { Id = item.RouteId });
+                } |
+                @Html.ActionLink("View Challenges", "ViewChallenge", new { id = item.RouteId })
+            </td>  
+        </tr>
+    }
 </table>

@@ -14,12 +14,14 @@ namespace PokedexProject.Data
         public int RouteId { get; set; }
         public virtual ICollection<Pokemon> RoutePokemon { get; set; }
         public virtual ICollection<PokeItem> ListOfItems { get; set; }
+        public virtual ICollection<Challenge> ListOfChallenges { get; set; }
         public string RouteName { get; set; }
 
         public PokeRoute()
         {
             RoutePokemon = new HashSet<Pokemon>();
             ListOfItems = new HashSet<PokeItem>();
+            ListOfChallenges = new HashSet<Challenge>();
         }
     }
 }

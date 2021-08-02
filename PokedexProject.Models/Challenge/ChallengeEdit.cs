@@ -12,6 +12,7 @@ namespace PokedexProject.Models.Challenge
         public Guid OwnerId { get; set; }
         public int ChallengeId { get; set; }
         public string ChallengeName { get; set; }
-        public ICollection<PokedexProject.Data.Question> ListOfQuestions { get; set; }
+        public int RouteId { get; set; }
+        public List<PokedexProject.Data.Question> ListOfQuestions { get; set; }
     }
 }

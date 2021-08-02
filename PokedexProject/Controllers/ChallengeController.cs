@@ -25,6 +25,7 @@ namespace PokedexProject.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.RouteList = new RouteService(Guid.Parse(User.Identity.GetUserId())).GetRoute();
             return View();
         }
         [HttpPost]
@@ -74,6 +75,13 @@ namespace PokedexProject.Controllers
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", "Challenge could not be updated.");
+            return View(model);
+        }
+        public ActionResult RouteChallenge(int id, RouteChallenge model)
+        {
+            ChallengeService service = CreateChallengeService();
+            service.GetChallengeByRoute(id);
+
             return View(model);
         }
         //public ActionResult AddQuestion(int Id)

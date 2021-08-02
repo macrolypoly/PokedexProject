@@ -42,11 +42,12 @@ namespace PokedexProject.Services
                         e =>
                         new RouteListItem
                         {
-                           OwnerId = _userId,
+                           //OwnerId = _userId,
                            RouteId = e.RouteId,
                            RouteName = e.RouteName,
                            ListOfItems = e.ListOfItems,
-                           RoutePokemon = e.RoutePokemon
+                           RoutePokemon = e.RoutePokemon,
+
                         }
                         );
                 return query.ToArray();

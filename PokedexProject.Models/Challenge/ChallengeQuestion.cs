@@ -20,6 +20,7 @@ namespace PokedexProject.Models.Challenge
         {
             get; set;
         }
+        public int RouteId { get; set; }
         public int QuestionId { get; set; }
         public string QuestionText { get; set; }
      }

@@ -51,6 +51,12 @@ namespace PokedexProject.Data
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
+            
+            //modelBuilder.Entity<Question>()
+            //    .HasOne(a => a.Answer)
+            //    .WithOne(b => b.Question)
+            //    .HasForeignKey<Answer>(b => b.QuestionId);
+               
         }
     }
 

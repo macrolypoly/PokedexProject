@@ -58,13 +58,21 @@
     <Compile Include="Challenge.cs" />
     <Compile Include="Choice.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202107222310523_ex.cs" />
-    <Compile Include="Migrations\202107222310523_ex.Designer.cs">
-      <DependentUpon>202107222310523_ex.cs</DependentUpon>
+    <Compile Include="Migrations\202107311811462_InitialCreate.cs" />
+    <Compile Include="Migrations\202107311811462_InitialCreate.Designer.cs">
+      <DependentUpon>202107311811462_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107272219171_ex2.cs" />
-    <Compile Include="Migrations\202107272219171_ex2.Designer.cs">
-      <DependentUpon>202107272219171_ex2.cs</DependentUpon>
+    <Compile Include="Migrations\202107311923272_ex.cs" />
+    <Compile Include="Migrations\202107311923272_ex.Designer.cs">
+      <DependentUpon>202107311923272_ex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108011931532_ex2.cs" />
+    <Compile Include="Migrations\202108011931532_ex2.Designer.cs">
+      <DependentUpon>202108011931532_ex2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108011935046_ex3.cs" />
+    <Compile Include="Migrations\202108011935046_ex3.Designer.cs">
+      <DependentUpon>202108011935046_ex3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PokeItem.cs" />
@@ -81,11 +89,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202107222310523_ex.resx">
-      <DependentUpon>202107222310523_ex.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107311811462_InitialCreate.resx">
+      <DependentUpon>202107311811462_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107272219171_ex2.resx">
-      <DependentUpon>202107272219171_ex2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107311923272_ex.resx">
+      <DependentUpon>202107311923272_ex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108011931532_ex2.resx">
+      <DependentUpon>202108011931532_ex2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108011935046_ex3.resx">
+      <DependentUpon>202108011935046_ex3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,9 +9,7 @@ namespace PokedexProject.Models.Challenge
 {
     public class ChallengeListItem
     {
-        public Guid OwnerId { get; set; }
         public int ChallengeId { get; set; }
         public string ChallengeName { get; set; }
-        public ICollection<PokedexProject.Data.Question> ListOfQuestions { get; set; }
     }
 }

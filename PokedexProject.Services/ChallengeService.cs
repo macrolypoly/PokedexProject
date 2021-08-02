@@ -1,5 +1,7 @@
 ﻿using PokedexProject.Data;
+using PokedexProject.Models;
 using PokedexProject.Models.Challenge;
+using PokedexProject.Models.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +24,8 @@ namespace PokedexProject.Services
                 new Challenge()
                 {
                     OwnerId = _userId,
-                    ChallengeId = model.ChallengeId,
                     ChallengeName = model.ChallengeName,
-                    ListOfQuestions = model.ListOfQuestions
+                    RouteId = model.RouteId
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -43,10 +44,8 @@ namespace PokedexProject.Services
                         e =>
                         new ChallengeListItem
                         {
-                            OwnerId = e.OwnerId,
                             ChallengeId = e.ChallengeId,
                             ChallengeName = e.ChallengeName,
-                            ListOfQuestions = e.ListOfQuestions
                         }
                         );
                 return query.ToArray();
@@ -68,6 +67,94 @@ namespace PokedexProject.Services
                         ChallengeName = entity.ChallengeName,
                         ListOfQuestions = entity.ListOfQuestions
                     };
+            }
+        }
+        public IEnumerable<RouteChallenge> GetChallengeByRoute(int id)
+        {
+            List<Question> questions = new QuestionService(_userId).GetQuestionByRoute(id);
+            //List<List<Choice>> choice = GetChoiesByQuestions(questions);
+            using (var ctx = new ApplicationDbContext())
+            {
+                
+                var entity =
+                    ctx
+                    .Challenges
+                    .Where(e => e.RouteId == id)
+                    .Select(
+                        e =>
+                new RouteChallenge
+                                 {
+                                     ChallengeId = e.ChallengeId,
+                                     ChallengeName = e.ChallengeName,
+                                     ListOfQuestions = e.ListOfQuestions,
+                                     Choices = e.Choices
+                                 });
+                //foreach(var rc in entity)
+                //{
+                //    rc.Choices = GetChoiesByQuestions(questions);
+                //}
+                return entity.ToList();
+            }
+        }
+
+        public List<List<Choice>> GetChoiesByQuestions(List<Question> listOfQuestions)
+        {
+            List<List<Choice>> listOfChoices = new List<List<Choice>>();
+            foreach (Question question in listOfQuestions)
+            {
+                List<Choice> list = new List<Choice>();
+                foreach (Choice choice in question.Choices)
+                {
+                    list.Add(choice);
+                }
+                    listOfChoices.Add(list);
+            }
+
+            //foreach(List<Choice> choiceList in listOfChoices)
+            //{
+            //    foreach(Choice x in choiceList )
+            //    {
+            //        foreach(Question question in listOfQuestions)
+            //        {
+            //            if(x.QuestionId == question.QuestionId)
+            //            {
+
+            //            }
+            //        }
+            //    }
+            //}
+
+            return listOfChoices;
+        }
+       public bool CheckChoice(IEnumerable<RouteChallenge> model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                foreach (var item in model)
+                {
+                    foreach (var userSelected in item.UserSelected)
+                    {
+                        var entity =
+                            ctx
+                            .Answers.Single(e => e.QuestionId == userSelected.QuestionId);
+                        for (int i = 0; i < item.Choices.Count; i++)
+                        {
+                            if (entity.AnswerText == userSelected.UserAnswer)
+                            {
+                                i++;
+                            }
+                            if (i < entity.AnswerId)
+                            {
+                                return true;
+                            }
+                            //return if pass or not
+
+                        }
+                    }
+                }
+                return false;
+
             }
         }
         public bool EditChallenge(ChallengeEdit model)

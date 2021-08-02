@@ -7,14 +7,12 @@ namespace PokedexProject.Data.Migrations
     {
         public override void Up()
         {
-            RenameTable(name: "dbo.Answers", newName: "Answer");
-            RenameTable(name: "dbo.Choices", newName: "Choice");
+            AddColumn("dbo.Choice", "ChallengeId", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            RenameTable(name: "dbo.Choice", newName: "Choices");
-            RenameTable(name: "dbo.Answer", newName: "Answers");
+            DropColumn("dbo.Choice", "ChallengeId");
         }
     }
 }

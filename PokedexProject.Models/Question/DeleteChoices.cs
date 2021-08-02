@@ -14,6 +14,6 @@ namespace PokedexProject.Models.Question
         public int ChoiceId { get; set; }
         public string ChoiceText { get; set; }
 
-        public virtual ICollection<PokedexProject.Data.Choice> Choices { get; set; }
+        public virtual List<PokedexProject.Data.Choice> Choices { get; set; }
     }
 }

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PokedexProject.Models.Route.RouteChallenge>
+
+@*@using PokedexProject.Data*@
+@{
+    ViewBag.Title = "RouteChallenge";
+}
+
+<h2>RouteChallenge</h2>
+
+<div id="challenge">
+    @using (Html.BeginForm())
+    {
+
+        foreach (var item in Model)
+        {
+            item.UserSelected = new List<PokedexProject.Models.ChallengeChoice>();
+            foreach (var question in item.ListOfQuestions)
+            {
+             @*for(int i = 0; i>question.Choices.Count; i++)
+             {
+                <h2>@question.QuestionText</h2>
+                <input type="radio" asp-for="@Model.UserSelected" value="question.Choices[i].Id"/>
+                <label asp-for="question.Choices[i].Id">question.Choices[i].ChoiceText</label>
+                <input type="hidden" asp-for="question.Choices[i].Id" />
+
+             }*@
+
+                <h2>@question.QuestionText</h2>
+                string selectedChoice = "";
+                foreach (var x in item.Choices)
+                {
+                    if (x.QuestionId == question.QuestionId)
+                    {
+                        @Html.RadioButton(x.ChoiceText, x) @x.ChoiceText
+                        selectedChoice = x.ChoiceText;
+                    }
+                }
+                PokedexProject.Models.ChallengeChoice temp = new PokedexProject.Models.ChallengeChoice();
+                temp.QuestionId = question.QuestionId;
+                temp.UserAnswer = selectedChoice;
+                item.UserSelected.Add(temp);
+            }
+        }
+        <input type="submit" value="Next" id="submitButton" />
+    }
+</div>

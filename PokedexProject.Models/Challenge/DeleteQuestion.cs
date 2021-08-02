@@ -13,6 +13,6 @@ namespace PokedexProject.Models.Challenge
         public string ChallengeName { get; set; }
         public int QuestionId { get; set; }
         public string QuestionText { get; set; }
-        public virtual ICollection<PokedexProject.Data.Question> ListOfQuestions { get; set; }
+        public virtual List<PokedexProject.Data.Question> ListOfQuestions { get; set; }
     }
 }

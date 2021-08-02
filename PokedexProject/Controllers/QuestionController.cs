@@ -24,6 +24,7 @@ namespace PokedexProject.Controllers
         public ActionResult Create()
         {
             ViewBag.ChallengeList = new ChallengeService(Guid.Parse(User.Identity.GetUserId())).GetChallenge();
+            ViewBag.AnswerList = new AnswerService(Guid.Parse(User.Identity.GetUserId())).GetAnswer();
             return View();
         }
         [HttpPost]

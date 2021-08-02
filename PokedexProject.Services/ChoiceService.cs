@@ -22,9 +22,9 @@ namespace PokedexProject.Services
                 new Choice()
                 {
                     OwnerId = _userId,
-                    ChoiceId = model.ChoiceId,
                     ChoiceText = model.ChoiceText,
-                    QuestionId = model.QuestionId
+                    QuestionId = model.QuestionId,
+                    //MyAnswer = model.MyAnswer
                     
                 };
             using (var ctx = new ApplicationDbContext())

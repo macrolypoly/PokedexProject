@@ -1,5 +1,7 @@
 ﻿using PokedexProject.Data;
+using PokedexProject.Models;
 using PokedexProject.Models.Question;
+using PokedexProject.Models.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +20,14 @@ namespace PokedexProject.Services
         }
         public bool CreateQuestion(QuestionCreate model)
         {
+
             var entity =
                 new Question()
                 {
-                  OwnerId = _userId,
-                  QuestionId = model.QuestionId,
-                  QuestionText = model.QuestionText,
-                  ChallengeId = model.ChallengeId,
-                  Choices = model.Choices
+                    OwnerId = _userId,
+                    QuestionText = model.QuestionText,
+                    ChallengeId = model.ChallengeId,
+                    AnswerId = model.AnswerId
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -51,7 +53,7 @@ namespace PokedexProject.Services
                             QuestionId = e.QuestionId,
                             QuestionText = e.QuestionText,
                             ChallengeId = e.ChallengeId,
-                            Choices = e.Choices
+                            Choices = e.Choices,
                         }
                         );
                 return query.ToArray();
@@ -74,6 +76,46 @@ namespace PokedexProject.Services
                         ChallengeId = entity.ChallengeId,
                         Choices = entity.Choices
                     };
+            }
+        }
+        public List<Question> GetQuestionByRoute(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                return (from p in ctx.Questions
+                        where p.Challenge.RouteId == id
+                        select new
+                        {
+                            OwnerId = p.OwnerId,
+                            QuestionId = p.QuestionId,
+                            QuestionText = p.QuestionText,
+                            ChallengeId = p.ChallengeId,
+                            Challenge = p.Challenge,
+                            Choices = p.Choices
+                        }).ToList()
+                        .Select(x => new Question
+                        {
+                            OwnerId = x.OwnerId,
+                            QuestionId = x.QuestionId,
+                            QuestionText = x.QuestionText,
+                            ChallengeId = x.ChallengeId,
+                            Challenge = x.Challenge,
+                            Choices = x.Choices
+                        }).ToList();
+                //var entity =
+                //    ctx
+                //    .Questions
+                //    .Where(e => e.Challenge.Route.RouteId == id)
+                //    .Select(e => new Question()
+                //    {
+                //        OwnerId = e.OwnerId,
+                //        QuestionId = e.QuestionId,
+                //        QuestionText = e.QuestionText,
+                //        ChallengeId = e.ChallengeId,
+                //        Choices = e.Choices
+                //    }).ToList();
+                //return entity;
             }
         }
         public bool EditQuestion(QuestionEdit model)

@@ -13,7 +13,7 @@ namespace PokedexProject.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202107272219171_ex2"; }
+            get { return "202108011931532_ex2"; }
         }
         
         string IMigrationMetadata.Source

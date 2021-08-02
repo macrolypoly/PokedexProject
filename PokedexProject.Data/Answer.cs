@@ -14,8 +14,8 @@ namespace PokedexProject.Data
         [Key]
         public int AnswerId { get; set; }
         public string AnswerText { get; set; }
-        [ForeignKey("Question")]
+        //[ForeignKey(nameof(Question))]
         public int QuestionId { get; set; }
-        public virtual Question Question { get; set; }
+        //public virtual Question Question { get; set; }
     }
 }

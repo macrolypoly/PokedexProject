@@ -1,14 +1,12 @@
-﻿@model IEnumerable<PokedexProject.Models.Challenge.ChallengeListItem>
+﻿@model IEnumerable<PokedexProject.Models.Route.RouteChallenge>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ViewChallenge";
 }
 
-<h2>Index</h2>
+<h2>ViewChallenge</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -29,9 +27,7 @@
             @Html.DisplayFor(modelItem => item.ChallengeName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ChallengeId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ChallengeId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ChallengeId })
+            @Html.ActionLink("Go to challenge", "RouteChallenge", new { id = item.ChallengeId }) |
         </td>
     </tr>
 }

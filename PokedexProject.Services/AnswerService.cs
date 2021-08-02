@@ -20,13 +20,20 @@ namespace PokedexProject.Services
                 new Answer()
                 {
                     OwnerId = _userId,
-                    AnswerId = model.AnswerId,
                     AnswerText = model.AnswerText,
-                    QuestionId = model.QuestionId
+                    QuestionId = 0
                     
                 };
+            //var choice =
+            //    new Choice()
+            //    {
+            //        OwnerId = _userId,
+            //        ChoiceText = entity.AnswerText,
+            //        QuestionId = entity.QuestionId
+            //    };
             using (var ctx = new ApplicationDbContext())
             {
+                //ctx.Choices.Add(choice);
                 ctx.Answers.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -89,7 +96,23 @@ namespace PokedexProject.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-       
+       public Answer GetAnswerByQuestion(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Answers
+                    .Single(e => e.QuestionId == id);
+                return new Answer
+                {
+                    OwnerId = entity.OwnerId,
+                    AnswerId = entity.AnswerId,
+                    AnswerText = entity.AnswerText,
+                    QuestionId = entity.QuestionId
+                };
+            }
+        }
         public bool DeleteAnswer(int pokeId)
         {
             using (var ctx = new ApplicationDbContext())

@@ -212,6 +212,35 @@ namespace PokedexProject.Controllers
 
             return View(model);
         }
+        public ActionResult ViewChallenge(int id)
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ChallengeService(userId);
+            var model = service.GetChallengeByRoute(id);
+
+            return View(model);
+        }
+        public ActionResult RouteChallenge(int id)
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ChallengeService(userId);
+            //var model = service.GetChallengeByRoute(id);
+            var model = service.GetChallengeByRoute(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult RouteChallenge(IEnumerable<RouteChallenge> model)
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ChallengeService(userId);
+            bool isCorrect = service.CheckChoice(model);
+            if (isCorrect)
+            {
+                RedirectToAction("Pass");
+            }
+            return View(model);
+
+        }
         private RouteService CreateRouteService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
