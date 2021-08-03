@@ -97,10 +97,11 @@
     <Compile Include="TrainerItems\TrainerItemsDetail.cs" />
     <Compile Include="TrainerItems\TrainerItemsEdit.cs" />
     <Compile Include="TrainerItems\TrainerItemsListItem.cs" />
-    <Compile Include="TrainerPokemon\TrainerItemsCreate.cs" />
-    <Compile Include="TrainerPokemon\TrainerItemsDetail.cs" />
-    <Compile Include="TrainerPokemon\TrainerItemsEdit.cs" />
-    <Compile Include="TrainerPokemon\TrainerItemsListItem.cs" />
+    <Compile Include="TrainerPokemon\TrainerPokemonCreate.cs" />
+    <Compile Include="TrainerPokemon\TrainerPokemonDetail.cs" />
+    <Compile Include="TrainerPokemon\TrainerPokemonEdit.cs" />
+    <Compile Include="TrainerPokemon\TrainerPokemonListItem.cs" />
+    <Compile Include="TrainerProfile.cs" />
     <Compile Include="Trainer\TrainerCreate.cs" />
     <Compile Include="Trainer\TrainerDetail.cs" />
     <Compile Include="Trainer\TrainerEdit.cs" />

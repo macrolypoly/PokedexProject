@@ -13,5 +13,6 @@ namespace PokedexProject.Models.Route
         public List<PokedexProject.Data.Question> ListOfQuestions { get; set; }
         public List<PokedexProject.Data.Choice> Choices { get; set; }
         public List<ChallengeChoice> UserSelected { get; set; }
+        public bool Pass { get; set; }
     }
 }

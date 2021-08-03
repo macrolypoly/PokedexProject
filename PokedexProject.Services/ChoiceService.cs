@@ -24,7 +24,7 @@ namespace PokedexProject.Services
                     OwnerId = _userId,
                     ChoiceText = model.ChoiceText,
                     QuestionId = model.QuestionId,
-                    //MyAnswer = model.MyAnswer
+                    ChallengeId = model.ChallengeId
                     
                 };
             using (var ctx = new ApplicationDbContext())

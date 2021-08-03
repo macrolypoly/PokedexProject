@@ -2,6 +2,7 @@
 using PokedexProject.Models;
 using PokedexProject.Models.Item;
 using PokedexProject.Models.Route;
+using PokedexProject.Models.TrainerPokemon;
 using PokedexProject.Services;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace PokedexProject.Controllers
     public class RouteController : Controller
     {
         // GET: Route
+        [HttpGet]
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
@@ -229,17 +231,85 @@ namespace PokedexProject.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult RouteChallenge(IEnumerable<RouteChallenge> model)
+        [ActionName("RouteChallenge")]
+        public ActionResult RouteChallenge(RouteChallenge model)
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ChallengeService(userId);
             bool isCorrect = service.CheckChoice(model);
             if (isCorrect)
             {
-                RedirectToAction("Pass");
+                model.Pass = true;
             }
-            return View(model);
+            return RedirectToAction("Pass");
 
+        }
+        public ActionResult Pass(IEnumerable<RouteChallenge> model)
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            if (model.Single(x => x.Pass).Pass)
+            {
+                //get service
+                var service = new TrainerPokemonService(userId);
+                //get trainer
+                var trainer = new TrainerService(userId).GetTrainer().Single(z => z.OwnerId == userId);
+                //get pokemon by route
+                var route = new RouteService(userId).GetRouteByChallenge(model.Select(x => x.ChallengeId).SingleOrDefault());
+                var pokemon = new PokemonService(userId).GetPokemonByRoute(route.RouteId);
+                //pick random pokemon to add
+                var random = new PokemonService(userId).PickRandomPokemon(pokemon);
+                int count = 0;
+                count = +count;
+                //create model
+                var poke = new TrainerPokemonCreate
+                {
+                    PokemonId = random.PokemonId,
+                    PokemonName = random.PokemonName,
+                    Count = count,
+                    TrainerId = trainer.TrainerId
+                };
+                // add pokemon to trainer
+                var trainerPokemon = new TrainerPokemonService(userId).CreateTrainerPokemon(poke);
+                //get item by route
+                var pokeitem = new ItemService(userId).GetItemByRoute(model.Select(x => x.ChallengeId).SingleOrDefault());
+                //get random item
+                var randomItem = new ItemService(userId).PickRandomItem(pokeitem);
+                //create model
+                var item = new TrainerItemsCreate
+                {
+                    ItemId = randomItem.ItemId,
+                    ItemName = randomItem.ItemName,
+                    TrainerId = trainer.TrainerId,
+                    Count = count
+                };
+                //add item to trainer
+                var trainerItem = new TrainerItemsService(userId).CreateTrainerItems(item);
+                //if all added
+                if (trainerPokemon && trainerItem)
+                {
+                    var vm = new TrainerProfile
+                    {
+                        TrainerId = item.TrainerId,
+                        PokemonId = poke.PokemonId,
+                        PokemonName = poke.PokemonName,
+                        PokeCount = poke.Count,
+                        ItemId = item.ItemId,
+                        ItemName = item.ItemName,
+                        ItemCount = item.Count
+                    };
+                    //return trainerprofile
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Fail");
+            }
+            return View();
+        }
+        public ActionResult Fail()
+        {
+            return View();
         }
         private RouteService CreateRouteService()
         {

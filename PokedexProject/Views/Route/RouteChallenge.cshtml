@@ -8,31 +8,34 @@
 <h2>RouteChallenge</h2>
 
 <div id="challenge">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(@*"RouteChallenge", "Route", FormMethod.Post, new { enctype = "multipart/form-data" }*@))
     {
 
         foreach (var item in Model)
         {
+            @Html.HiddenFor(x => item.ChallengeId)
+            @Html.HiddenFor(z => item.ChallengeName)
+            @Html.HiddenFor(c => item.ListOfQuestions)
             item.UserSelected = new List<PokedexProject.Models.ChallengeChoice>();
             foreach (var question in item.ListOfQuestions)
             {
-             @*for(int i = 0; i>question.Choices.Count; i++)
-             {
-                <h2>@question.QuestionText</h2>
-                <input type="radio" asp-for="@Model.UserSelected" value="question.Choices[i].Id"/>
-                <label asp-for="question.Choices[i].Id">question.Choices[i].ChoiceText</label>
-                <input type="hidden" asp-for="question.Choices[i].Id" />
+                @*for(int i = 0; i>question.Choices.Count; i++)
+                    {
+                       <h2>@question.QuestionText</h2>
+                       <input type="radio" asp-for="@Model.UserSelected" value="question.Choices[i].Id"/>
+                       <label asp-for="question.Choices[i].Id">question.Choices[i].ChoiceText</label>
+                       <input type="hidden" asp-for="question.Choices[i].Id" />
 
-             }*@
+                    }*@
 
                 <h2>@question.QuestionText</h2>
                 string selectedChoice = "";
-                foreach (var x in item.Choices)
+                for (int i = 0; i < item.Choices.Count();i++)
                 {
-                    if (x.QuestionId == question.QuestionId)
+                    if (item.Choices[i].QuestionId == question.QuestionId)
                     {
-                        @Html.RadioButton(x.ChoiceText, x) @x.ChoiceText
-                        selectedChoice = x.ChoiceText;
+                        @Html.RadioButton(item.Choices[i].ChoiceText, item) @item.Choices[i].ChoiceText
+                        selectedChoice = item.Choices[i].ChoiceText;
                     }
                 }
                 PokedexProject.Models.ChallengeChoice temp = new PokedexProject.Models.ChallengeChoice();
@@ -41,6 +44,6 @@
                 item.UserSelected.Add(temp);
             }
         }
-        <input type="submit" value="Next" id="submitButton" />
+        <input type="submit" value="Next" id="btn btn-default" />
     }
 </div>

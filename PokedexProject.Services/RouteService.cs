@@ -42,15 +42,15 @@ namespace PokedexProject.Services
                         e =>
                         new RouteListItem
                         {
-                           //OwnerId = _userId,
+                           OwnerId = e.OwnerId,
                            RouteId = e.RouteId,
                            RouteName = e.RouteName,
                            ListOfItems = e.ListOfItems,
                            RoutePokemon = e.RoutePokemon,
-
+                           ListOfChallenges = e.ListOfChallenges
                         }
                         );
-                return query.ToArray();
+                return query.ToList();
             }
         }
         public RouteDetail GetRouteById(int id)
@@ -83,6 +83,25 @@ namespace PokedexProject.Services
                        ListOfItems = entity.ListOfItems,
                        RoutePokemon = entity.RoutePokemon
                     };
+            }
+        }
+        public PokeRoute GetRouteByChallenge(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Routes
+                    .Single(e => e.ListOfChallenges.Single(x => x.ChallengeId == id).ChallengeId == id);
+                return new PokeRoute
+                {
+                    RouteId = entity.RouteId,
+                    RouteName = entity.RouteName,
+                    RoutePokemon = entity.RoutePokemon,
+                    ListOfChallenges = entity.ListOfChallenges,
+                    ListOfItems = entity.ListOfItems,
+                    OwnerId = entity.OwnerId
+                };
             }
         }
         public bool AddItem(ItemListCreate model)

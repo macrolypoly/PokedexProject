@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokedexProject.Models.TrainerItems
+namespace PokedexProject.Models.TrainerPokemon
 {
-    public class TrainerPokemonEdit
+    public class TrainerPokemonDetail
     {
         [Key]
         public int PokemonId { get; set; }

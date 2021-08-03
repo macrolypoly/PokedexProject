@@ -300,6 +300,8 @@
     <Content Include="Views\Challenge\Index.cshtml" />
     <Content Include="Views\Route\ViewChallenge.cshtml" />
     <Content Include="Views\Route\RouteChallenge.cshtml" />
+    <Content Include="Views\Route\Pass.cshtml" />
+    <Content Include="Views\Route\Fail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -102,6 +102,40 @@ namespace PokedexProject.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public IEnumerable<PokeItem> GetItemByRoute(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                ctx
+                .Items
+                .Where(e => e.ListOfRoutes.Single(x => x.RouteId == id).RouteId == id)
+                .Select(
+                    z =>
+                    new PokeItem
+                    {
+                        OwnerId = z.OwnerId,
+                        ItemId = z.ItemId,
+                        ItemName = z.ItemName,
+                        ListOfRoutes = z.ListOfRoutes,
+                        Description = z.Description
+                    });
+                return entity.ToList();
+            }
+        }
+        public PokeItem PickRandomItem(IEnumerable<PokeItem> model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var random = new Random();
+                var item = model.ToList().OrderBy(s => random.NextDouble()).First();
+                var entity =
+                    ctx
+                    .Items
+                    .Single(e => e.ItemId == item.ItemId);
+                return entity;
+            }
+        }
         public bool DeleteItem(int pokeId)
         {
             using (var ctx = new ApplicationDbContext())

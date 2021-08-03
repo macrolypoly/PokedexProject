@@ -96,6 +96,26 @@ namespace PokedexProject.Services
                 return entity.ToList();
             }
         }
+        public RouteChallenge GetRouteChallenge(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Challenges
+                    .Select(
+                        e =>
+                new RouteChallenge
+                {
+                    ChallengeId = e.ChallengeId,
+                    ChallengeName = e.ChallengeName,
+                    ListOfQuestions = e.ListOfQuestions,
+                    Choices = e.Choices
+                })
+                    .Where(e => e.ChallengeId == id);
+                return entity.Single();
+            }
+        }
 
         public List<List<Choice>> GetChoiesByQuestions(List<Question> listOfQuestions)
         {
@@ -126,33 +146,36 @@ namespace PokedexProject.Services
 
             return listOfChoices;
         }
-       public bool CheckChoice(IEnumerable<RouteChallenge> model)
+       public bool CheckChoice(RouteChallenge model)
         {
             using (var ctx = new ApplicationDbContext())
             {
 
-                foreach (var item in model)
-                {
-                    foreach (var userSelected in item.UserSelected)
+                //foreach (var item in model)
+                //{
+                    foreach (var userSelected in model.UserSelected)
                     {
                         var entity =
                             ctx
                             .Answers.Single(e => e.QuestionId == userSelected.QuestionId);
-                        for (int i = 0; i < item.Choices.Count; i++)
+                        for (int i = 0; i < model.Choices.Count; i++)
                         {
                             if (entity.AnswerText == userSelected.UserAnswer)
                             {
                                 i++;
                             }
-                            if (i < entity.AnswerId)
+                            decimal percentage = i / model.ListOfQuestions.Count();
+                            if (percentage < 50)
                             {
-                                return true;
+                                return false;
                             }
+                            else if (percentage > 40)
+                                return true;
                             //return if pass or not
 
                         }
                     }
-                }
+                //}
                 return false;
 
             }

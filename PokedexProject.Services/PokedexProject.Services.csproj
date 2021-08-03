@@ -63,6 +63,7 @@
     <Compile Include="QuestionService.cs" />
     <Compile Include="RouteService.cs" />
     <Compile Include="TrainerItemsService.cs" />
+    <Compile Include="TrainerPokemonService.cs" />
     <Compile Include="TrainerService.cs" />
   </ItemGroup>
   <ItemGroup>

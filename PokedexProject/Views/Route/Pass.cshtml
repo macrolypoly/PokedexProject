@@ -1,0 +1,14 @@
+﻿@model PokedexProject.Models.TrainerProfile
+
+@{
+    ViewBag.Title = "Pass";
+}
+
+<h2>Pass</h2>
+<div id="container">
+    <h2>Congrats, you've caught @Model.PokemonName and found a(n) @Model.ItemName!</h2>
+
+    @Html.ActionLink("See your pokemon", "Index", "TrainerPokemon") |
+    @Html.ActionLink("See your items", "Index", "TrainerItems") |
+    @Html.ActionLink("Home", "Index", "Home")
+</div>

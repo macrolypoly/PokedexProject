@@ -56,9 +56,12 @@ namespace PokedexProject.Controllers
                     QuestionId = detail.QuestionId
 
                 };
+            ViewBag.QuestionList = new QuestionService(Guid.Parse(User.Identity.GetUserId())).GetQuestion();
             return View(model);
         }
-        public ActionResult EditAnswer(int id, AnswerEdit model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, AnswerEdit model)
         {
             if (!ModelState.IsValid) return View(model);
             if (model.AnswerId != id)

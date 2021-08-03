@@ -74,6 +74,41 @@ namespace PokedexProject.Services
                     };
             }
         }
+        public Pokemon PickRandomPokemon(IEnumerable<Pokemon> model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var random = new Random();
+                var item = model.ToList().OrderBy(s => random.NextDouble()).First();
+                var entity =
+                    ctx
+                    .Pokemon
+                    .Single(e => e.PokemonId == item.PokemonId);
+                return entity;
+            }
+        }
+        public IEnumerable<Pokemon> GetPokemonByRoute(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                ctx
+                .Pokemon
+                .Where(e => e.RoutesFound.Single(x => x.RouteId == id).RouteId == id)
+                .Select(
+                    z =>
+                    new Pokemon
+                    {
+                        OwnerId = z.OwnerId,
+                        PokemonId = z.PokemonId,
+                        PokemonName = z.PokemonName,
+                        RoutesFound = z.RoutesFound,
+                        Type = z.Type,
+                        Type2 = z.Type2
+                    });
+                return entity.ToList();
+            }
+        }
         public bool AddRoute(RoutePokemon model)
         {
             using (var ctx = new ApplicationDbContext())

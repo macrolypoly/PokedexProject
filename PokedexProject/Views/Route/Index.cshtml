@@ -39,8 +39,12 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.RouteId }) ;
                     @Html.ActionLink("Add Pokemon To Route", "AddPokemon", new { id = item.RouteId });
                     @Html.ActionLink("Add Item to Route", "AddItem", new { Id = item.RouteId });
-                } |
-                @Html.ActionLink("View Challenges", "ViewChallenge", new { id = item.RouteId })
+                }
+                else
+                {
+                    @Html.ActionLink("View Challenges", "ViewChallenge", new { id = item.RouteId })
+                }
+
             </td>  
         </tr>
     }
